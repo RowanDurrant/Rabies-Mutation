@@ -27,6 +27,7 @@ The scripts below are all packaged up and sourced in one overall script, [sim_an
 - [2a_prep_phylo_trees.R](code/2a_prep_phylo_trees.R) - takes a phylogenetic tree in the MEGA X table format and makes it usable
 - [3_main_calculations.R](code/3_main_calculations.R) - calculates number of generations between sequences and per generation mutation rate. Uses [generations_calculation_function.R](code/generations_calculation_function.R)
 - [4_nice_graphs.R](code/4_nice_graphs.R) - makes graphs
+
 Steps 2a and 3 are run through an overall script, [0_overall_script.R](code/0_overall_script.R)
 
 ### Output files
