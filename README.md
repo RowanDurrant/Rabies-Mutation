@@ -2,7 +2,7 @@
 
 Repo for code relating to the manuscipt on how and how much rabies mutates.
 
-##Input
+## Input
 Data files needed to run these scripts. NB: all files needed may not be publicly available due to this project relying on people kindly letting me use their unpublished data!
 
 ## Code: How does rabies mutate?
