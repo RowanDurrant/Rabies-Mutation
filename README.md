@@ -30,11 +30,17 @@ The scripts below are all packaged up and sourced in one overall script, [sim_an
 
 Steps 2a and 3 are run through an overall script, [0_overall_script.R](code/0_overall_script.R)
 
-### Output files
+### Prefer Julia?
+Some scripts are also available in [Julia](https://julialang.org/)! 
+- [0_main_script.jl](0_main_script.jl)
+- [3_main_calculations.jl](code/3_main_calculations.jl) - Using the Julia version runs about 4x quicker than the R version!
+- [generations_calculation_function.jl](code/generations_calculation_function.jl)
+
+## Output files
 Some output files are too big for GitHub! (But the scripts needed to generate them are available)
 
-### Plots
+## Plots
 Files of plots used in manuscript.
 
-### Communication
+## Communication
 Posters and presentations I've used to communicate this project.
