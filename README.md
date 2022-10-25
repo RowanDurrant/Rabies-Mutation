@@ -2,13 +2,16 @@
 
 Repo for code relating to the manuscipt on how and how much rabies mutates.
 
-## How does rabies mutate?
+##Input
+Data files needed to run these scripts. NB: all files needed may not be publicly available due to this project relying on people kindly letting me use their unpublished data!
+
+## Code: How does rabies mutate?
 - [simulate_perfect_clockrate.R](code/simulate_perfect_clockrate.R) takes simulation output and generates mutations onto cases using a clock rate model (mutations accumulate per unit time). Uses [mutations_function_time.R](code/mutations_function_time.R).
 - [simulate_per_generation.R](code/simulate_per_generation.R) does the same, but with a per-generation mutation model. Uses [mutations_function.R](code/mutations_function.R).
 - [compare_clockrate_gen_divergence.R](code/compare_clockrate_gen_divergence.R) makes divergence-time plots and compares R^2 values for both per-time and per-generation simulations.
 - [4_nice_graphs.R](code/4_nice_graphs.R) - makes graphs
 
-## What is RABV's mutation rate?
+## Code: What is RABV's mutation rate?
 (NOTE: clock rate method calculation was done in excel, so R script for this doesn't exist, and following scripts are for novel method & comparison only)
 ### Simulations to test accuracy
 The scripts below are all packaged up and sourced in one overall script, [sim_analysis_main.R](code/sim_analysis_main.R):
@@ -27,3 +30,9 @@ The scripts below are all packaged up and sourced in one overall script, [sim_an
 
 ### Output files
 Some output files are too big for GitHub! (But the scripts needed to generate them are available)
+
+### Plots
+Files of plots used in manuscript.
+
+### Communication
+Posters and presentations I've used to communicate this project.
