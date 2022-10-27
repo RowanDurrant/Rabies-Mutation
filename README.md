@@ -4,6 +4,7 @@ Repo for code relating to the manuscipt on how and how much rabies mutates.
 
 ## Input
 Data files needed to run these scripts. NB: all files needed may not be publicly available due to this project relying on people kindly letting me use their unpublished data!
+- [EF_input](input/EF_input) - output from a branching process simulation that we use as a starting point to simulate mutations on top of. Kindly shared with me by Elaine Ferguson - will cite her paper here when it is out!
 
 ## Code: How does rabies mutate?
 - [simulate_perfect_clockrate.R](code/simulate_perfect_clockrate.R) takes simulation output and generates mutations onto cases using a clock rate model (mutations accumulate per unit time). Uses [mutations_function_time.R](code/mutations_function_time.R).
@@ -38,9 +39,10 @@ Some scripts are also available in [Julia](https://julialang.org/)!
 
 ## Output files
 Some output files are too big for GitHub! (But the scripts needed to generate them are available)
+- [simulation](output/simulation) - folder with output files relating to all the simulated methods, including divergence-time plot related data and mutation rate calculation method accuracy. Raw simulation output files aren't uploaded here (too hefty/messy) but can be made available upon request.
 
 ## Plots
-Files of plots used in manuscript.
+Files of plots used in the manuscript.
 
 ## Communication
 Posters and presentations I've used to communicate this project.
