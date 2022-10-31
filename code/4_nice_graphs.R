@@ -62,7 +62,7 @@ ggsave("plots/figure 4 transparent.png", bg = "transparent")
 
 #FIGURE 5
 tipDists = read.csv("output/pemba/full_bootstraps_100.csv") #change if you changed no. reps
-clusters = read.csv("input/pembaWGS.csv")
+clusters = read.csv("input/Pemba_assignment.csv")
 alnDist = read.csv("output/pemba/snpdistancesall.csv")
 rownames(alnDist) <- alnDist[,1]
 alnDist[,1] <- NULL
@@ -76,10 +76,12 @@ lineageTipDists = head(tipDists, 0)
 for(i in lineages){
   if(nrow(clusters[clusters$lineage == i,]) > 1){
     newLineage = tipDists[tipDists$Tip1 %in% clusters$ID[clusters$lineage == i] &
-               tipDists$Tip2 %in% clusters$ID[clusters$lineage == i],]
+                            tipDists$Tip2 %in% clusters$ID[clusters$lineage == i],]
     newLineage$Lineage = i
     lineageTipDists = rbind(lineageTipDists, newLineage)
+    print(paste(i, nrow(clusters[clusters$lineage == i,]), mean(newLineage$snpsPerGen)))
   }
+  else{print(paste(i, nrow(clusters[clusters$lineage == i,])))}
 }
 
 p5 = ggplot(data = lineageTipDists, aes(x = snpsPerGen)) +
@@ -93,7 +95,7 @@ p5 = ggplot(data = lineageTipDists, aes(x = snpsPerGen)) +
         legend.box.background = element_rect(fill='transparent'))+
   xlab("SNPs per Generation")+
   geom_vline(xintercept = 0.17, lty = 2)
-ggsave("plots/figure 5 transparent vline.png", bg = "transparent")
+ggsave("plots/figure 5 transparent vline updated.png", bg = "transparent")
 
 #FIGURE 6a
 
