@@ -1,4 +1,4 @@
-# Rabies-Mutation-Rates
+# Rabies Mutation
 
 Repo for code relating to the manuscipt on how and how much rabies mutates.
 
