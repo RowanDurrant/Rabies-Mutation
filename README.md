@@ -1,6 +1,7 @@
 # Rabies Mutation
-
-Repo for code relating to the manuscipt on how and how much rabies mutates.
+Creator: Rowan Durrant - School of Biodiversity, One Health & Veterinary Medicine, Glasgow University
+Contact me: r.durrant.1@research.ac.uk
+Description: Repo for code and data used in the manuscipt "Determining the Relationship Between Time, Transmission and the Evolution of the Rabies Virus".
 
 ## Input
 Data files needed to run these scripts. NB: all files needed may not be publicly available due to this project relying on people kindly letting me use their unpublished data!
