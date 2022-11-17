@@ -1,6 +1,6 @@
 library(fitdistrplus)
 
-tipDists = read.csv("output/full_bootstraps_100.csv")
+tipDists = read.csv("output/pemba/full_bootstraps_100.csv")
 snps_predict = tipDists$snpsPerGen
 
 runs = rep(NA, 1000)

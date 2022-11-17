@@ -1,4 +1,4 @@
-treeYears = read.csv(paste0("output/simulation/simSequences",seed,"_",noCases,"_",perBaseRate*genomeLength,"_strict.MCC.csv"))
+treeYears = read.csv(paste0("output/simulation/simSequences",seed,"_",noCases,"_",perBaseRate,"_strict.MCC.csv"))
 #df with columns AncId, Desc1, Desc2, Branch.Length.1 & Branch.Length.2
 
 treeYearsUnpaired = setNames(data.frame(matrix(ncol = 3, nrow = 0)), 
