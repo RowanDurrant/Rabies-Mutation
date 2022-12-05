@@ -2,9 +2,56 @@
 library(ggplot2)
 library(patchwork)
 
-#FIGURE 1
-df = read.csv("output/simulation/clockrate-gen-model-comparison2.csv")
 
+#FIGURE 1
+library(stringr)
+startSeq = paste(rep("a",12000), collapse = "")
+files = c("output/simulation/simsampledtips_perGen_24_0.000166666666666667_124_621.7.csv",
+          "output/simulation/simsampledtips_perfectClockRate_24_6.33713561470215e-06_124_621.7.csv",
+          "output/simulation/simsampledtips_perGen_24_1.66666666666667e-05_124_621.7.csv",
+          "output/simulation/simsampledtips_perfectClockRate_24_6.33713561470216e-07_124_621.7.csv")
+
+for(f in 1:length(files)){
+        samples = read.csv(files[f])
+        time = rep(NA, nrow(samples))
+        divergence = rep(NA, nrow(samples))
+        for(i in 1:nrow(samples)){
+          time[i] = samples$infD[i]
+          divergence[i] = (nchar(startSeq) - str_count(samples$sequence[i], "a"))/nchar(startSeq)
+          
+        }
+        ml = lm(divergence ~ time)
+        if(f == 1){
+        plot(divergence ~ time, xlab = "Time (days)", ylab = "Divergence (nucleotide subs./site)", col = "red",main = "2 SNPs per Generation")
+        abline(reg = ml, col = "red")
+        legend(x = "topleft",          # Position
+               legend = c("Generation", "Clock Rate"),  # Legend texts
+               fill = c("red", "blue"),
+               bty="n")         # Line colors
+        }
+        else if(f == 2){
+          points(divergence ~ time, col = "blue",)
+          abline(reg = ml, col = "blue")
+        }
+        else if(f == 3){
+          plot(divergence ~ time, xlab = "Time (days)", ylab = "Divergence (nucleotide subs./site)", col = "red",
+               main = "0.2 SNPs per Generation", ylim = c(0,0.0022))
+          abline(reg = ml, col = "red")
+          legend(x = "topleft",          # Position
+                 legend = c("Generation", "Clock Rate"),  # Legend texts
+                 fill = c("red", "blue"),
+                 bty = "n")         # Line colors
+        }
+        else if(f == 4){
+          points(divergence ~ time, col = "blue")
+          abline(reg = ml, col = "blue")
+        }
+      }
+
+
+#FIGURE 2
+df = read.csv("output/simulation/clockrate-gen-model-comparison.csv")
+df = df[is.na(df$Method) == F,]
 ggplot(data = df, aes(x = EquivalentPerGenRate, y = R_Squared, fill = Method)) +
   geom_point(aes(colour = Method)) +
   geom_smooth(method = "gam", aes(colour = Method)) +
@@ -15,20 +62,25 @@ ggplot(data = df, aes(x = EquivalentPerGenRate, y = R_Squared, fill = Method)) +
                      values=c('Clock Rate'='blue', 'Generation'='red'))+
   scale_fill_manual(name='Mutation Model',
                      values=c('Clock Rate'='blue', 'Generation'='red'))
-ggsave("Figure 1.png", bg = "transparent")
+#ggsave("Figure 1.png", bg = "transparent")
+
+library(ggplot2)
+library(devtools)
 
 df2 = df[df$PercentSampled == 0.2,]
+
 ggplot(data = df2, aes(x = EquivalentPerGenRate, y = R_Squared, fill = Method)) +
   geom_point(aes(colour = Method)) +
-  scale_x_continuous(trans='log10')+
-  geom_smooth(aes(colour = Method)) +
+scale_x_continuous(trans='log10')+
+  geom_smooth(method = "gam", aes(colour = Method)) +
   xlab("Equivalent Per-Generation Mutation Rate (SNPs/Generation)") + ylab("R Squared")+
   theme_bw() +
   scale_color_manual(name='Mutation Model',
                      values=c('Clock Rate'='blue', 'Generation'='red'))+
   scale_fill_manual(name='Mutation Model',
-                    values=c('Clock Rate'='blue', 'Generation'='red'))
-ggsave("Figure 1 0.2 sampled only.png")
+                    values=c('Clock Rate'='blue', 'Generation'='red')) 
+
+#ggsave("Figure 1 0.2 sampled only.png")
 
 #FIGURE 3 
 novelMethodAccuracy = read.csv("output/simulation/novel_method_accuracy.csv")
@@ -100,43 +152,35 @@ for(i in lineages){
   else{print(paste(i, nrow(clusters[clusters$lineage == i,])))}
 }
 
-p5 = ggplot(data = lineageTipDists, aes(x = snpsPerGen)) +
+ggplot(data = lineageTipDists, aes(x = snpsPerGen)) +
   geom_density(alpha=.35, fill="#FF6666") +
   xlim(0,0.75)+
   facet_wrap(~ Lineage) +
   theme_bw() +
-  theme(panel.background = element_rect(fill='transparent'),
-        plot.background = element_rect(fill='transparent', color=NA),
-        legend.background = element_rect(fill='transparent'),
-        legend.box.background = element_rect(fill='transparent'))+
   xlab("SNPs per Generation")+
   geom_vline(xintercept = 0.17, lty = 2)
-ggsave("plots/figure 5 transparent vline updated.png", bg = "transparent")
+ggsave("plots/figure 5 vline updated.png")
 
-#FIGURE 6a
+#FIGURE 6
 
-simTipDists = read.csv("output/simulation/full_bootstraps_sim_281.41666666666667e-05100100100.csv")
+simTipDists = read.csv("output/simulation/full_bootstraps_sim_24_1.41666666666667e-05_166_150_timescaled.csv")
 simTipDists$TimeDiffYears = simTipDists$TimeDiff / 365
 
-ggplot(data = tipDists, aes(y = snpsPerGen, x = TimeDiffYears)) +
-  geom_point(aes(colour = "Pemba & Serengeti"), alpha = .01) +
-  ylim(0,1.1)+
-  geom_point(data = simTipDists, aes(y = snpsPerGen, x = TimeDiffYears, colour = "Simulation"), alpha = .01) +
+p6 = ggplot(data = simTipDists, aes(y = snpsPerGen, x = TimeDiffYears)) +
+  geom_point(colour = "blue", alpha = .1) +
   theme_bw() +
   ylab("SNPs per Generation") + xlab("Temporal Distance (Years)") +
-  geom_hline(yintercept = mean(tipDists$snpsPerGen), lty = 2)+
-  scale_color_manual("", breaks = c("Simulation", "Pemba & Serengeti"), 
-                     values=c('blue', 'red'))+
-  guides(colour = guide_legend(override.aes = list(alpha = 1)))
-ggsave("plots/figure 6 transparent hline updated.png")
+  geom_hline(yintercept = 0.17)
+#ggsave("plots/figure 6 hline updated.png")
 #p6
+p7 = ggplot(data = lineageTipDists, aes(x = TimeDiffYears, y = snpsPerGen)) +
+  geom_point(alpha=.35, colour = "red") +
+ # xlim(0,0.75)+
+  #geom_hline(aes(yintercept = mean(snpsPerGen)), lty = 2)+
+  facet_wrap(~ Lineage) +
+  theme_bw() +
+  ylab("SNPs per Generation")+
+  xlab("Temporal Distance (years)")
 
+p6 / p7
 
-#Figure 7?
-par(mfrow = c(3,3))
-for(i in unique(lineageTipDists$Lineage)){
-  df3 = lineageTipDists[lineageTipDists$Lineage == i,]
-  plot(df3$snpsPerGen ~ df3$TimeDiffYears, col = "red", main = i, xlab = "Time", 
-       ylab = "SNPs per Generation", xlim = c(0,40), ylim = c(0,0.6))
-  
-}

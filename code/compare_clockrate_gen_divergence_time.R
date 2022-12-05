@@ -22,8 +22,8 @@ vect01 = caseSizes[seq(3,length(caseSizes),4)]
 vect02 = caseSizes[seq(4,length(caseSizes),4)]
 
 for(noCases in caseSizes){
-  for(k in perBaseRates){
-    for(g in branches){
+  for(g in branches){
+    for(k in perBaseRates){
       if(file.exists(paste0("output/simulation/simsampledtips_perGen_24_",k,"_",g,"_",noCases,".csv"))){
         samples = read.csv(paste0("output/simulation/simsampledtips_perGen_24_",k,"_",g,"_",noCases,".csv"))
         
@@ -50,7 +50,8 @@ for(noCases in caseSizes){
         else if(noCases %in% vect02){df2$PercentSampled = 0.2}
         df = rbind(df, df2)
        }
-      for(j in perTimeRates){
+    }
+    for(j in perTimeRates){
         if(file.exists(paste0("output/simulation/simsampledtips_perfectClockRate_24_",j,"_",g,"_",noCases,".csv"))){
           samples = read.csv(paste0("output/simulation/simsampledtips_perfectClockRate_24_",j,"_",g,"_",noCases,".csv"))
           
@@ -80,13 +81,10 @@ for(noCases in caseSizes){
         }
 
       }
-      
-    }
-    
   }
 }
 
-#write.csv(df, "output/simulation/clockrate-gen-model-comparison.csv")
+write.csv(df, "output/simulation/clockrate-gen-model-comparison.csv")
 #df=read.csv("output/simulation/clockrate-gen-model-comparison.csv")
 df = df[is.na(df$Method) == F,]
 # par(mfrow = c(2,2))
