@@ -7,8 +7,10 @@ Description: Repo for code and data used in the manuscipt "Determining the Relat
 
 
 ## Input
-Data files needed to run these scripts. NB: all files needed may not be publicly available due to this project relying on people kindly letting me use their unpublished data!
-- [EF_input](input/EF_input) - output from a branching process simulation that we use as a starting point to simulate mutations on top of. Kindly shared with me by Elaine Ferguson - will cite her paper here when it is out!
+Data files needed to run these scripts.
+- [EF_input](input/EF_input) - output from a branching process simulation that we use as a starting point to simulate mutations on top of.
+- [Pemba_assigment.csv](input/Pemba_assignment.csv) - Lineages of each sequence in the Pemba dataset, assigned using [MADDOG](https://github.com/KathrynCampbell/MADDOG).
+- [Pemba.csv](input/pemba.csv) - Pemba timescaled tree in MEGA X's table format.
 
 ## Code: How does rabies mutate?
 - [simulate_perfect_clockrate.R](code/simulate_perfect_clockrate.R) takes simulation output and generates mutations onto cases using a clock rate model (mutations accumulate per unit time). Uses [mutations_function_time.R](code/mutations_function_time.R).
@@ -17,7 +19,6 @@ Data files needed to run these scripts. NB: all files needed may not be publicly
 - [4_nice_graphs.R](code/4_nice_graphs.R) - makes graphs
 
 ## Code: What is RABV's mutation rate?
-(NOTE: clock rate method calculation was done in excel, so R script for this doesn't exist, and following scripts are for novel method & comparison only)
 ### Simulations to test accuracy
 The scripts below are all packaged up and sourced in one overall script, [sim_analysis_main.R](code/sim_analysis_main.R):
 - [1_probability_density_matrix.R](code/1_probability_density_matrix.R) - generates the time/generations density matrix
@@ -32,6 +33,9 @@ The scripts below are all packaged up and sourced in one overall script, [sim_an
 - [2a_prep_phylo_trees.R](code/2a_prep_phylo_trees.R) - takes a phylogenetic tree in the MEGA X table format and makes it usable
 - [3_main_calculations.R](code/3_main_calculations.R) - calculates number of generations between sequences and per generation mutation rate. Uses [generations_calculation_function.R](code/generations_calculation_function.R)
 - [4_nice_graphs.R](code/4_nice_graphs.R) - makes graphs
+- [5_snp_distrib_param_calcs.R](code/5_snp_distrib_param_calcs.R) - fits distribution curves to the novel method's output.
+- [clock_rate_method_pemba_distribution.R](code/clock_rate_method_pemba_distribution.R) - as above, but for the clock rate method.
+- [SNP_probs_1_gen.R](code/SNP_probs_1_gen.R) - calculates the probability of a number of SNPs occuring over one generation, given the mean SNPs/gen values from the novel and clock rate methods.
 
 Steps 2a and 3 are run through an overall script, [0_overall_script.R](code/0_overall_script.R)
 
@@ -41,9 +45,10 @@ Some scripts are also available in [Julia](https://julialang.org/)!
 - [3_main_calculations.jl](code/3_main_calculations.jl) - Using the Julia version runs about 4x quicker than the R version!
 - [generations_calculation_function.jl](code/generations_calculation_function.jl)
 
-## Output files
+## Output
 Some output files are too big for GitHub! (But the scripts needed to generate them are available)
 - [simulation](output/simulation) - folder with output files relating to all the simulated methods, including divergence-time plot related data and mutation rate calculation method accuracy. Raw simulation output files aren't uploaded here (too hefty/messy) but can be made available upon request.
+- [pemba](output/pemba) - folder with output files relating to calculating the per-generation substitution rate from real RABV sequences. The full bootstrapped novel method output is too big to upload but can be made available on request.
 
 ## Plots
 Files of plots used in the manuscript.
