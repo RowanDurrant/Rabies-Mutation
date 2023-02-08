@@ -4,10 +4,11 @@ library(ape)
 source("code/mutations_function.R")
 source("code/generations_calculation_function.R") 
 
-densities= read_csv("output/pemba/densities.csv")
+densities= read_csv("output/pemba/densities_2022.csv")
 densities = densities[,2:ncol(densities)]
 
 NoReps = 100
+genomeLength = 11923
 
 start1 = Sys.time()
 source("code/2a_prep_phylo_trees.R")

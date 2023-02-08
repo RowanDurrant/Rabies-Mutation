@@ -1,12 +1,11 @@
-clockRates = read.csv("output/pemba/treeYearsUnpairedClockRate.csv")
+library(fitdistrplus)
 
-clockRates$Clock.Rate.Weighted = clockRates$Clock.Rate * clockRates$Branch.Length
-meanClockRate = sum(clockRates$Clock.Rate.Weighted)/sum(clockRates$Branch.Length)
+meanClockRate = 1.903E-04
 
-meanClockRate*12000*(26.3/365)
+meanClockRate*11923*(17.3/365)
 
-SI_meanlog <- 2.96
-SI_sdlog <-  0.82
+SI_meanlog <- 2.85
+SI_sdlog <-  0.966
 
 max_time = 1:1000
 
@@ -17,7 +16,7 @@ for(i in max_time){
 
 mutation_distr = c()
 for(j in max_time){
-  mutation_time = meanClockRate*12000*(j/365)
+  mutation_time = meanClockRate*11923*(j/365)
   weighted = rep(mutation_time, curve[j]/min(curve))
   mutation_distr = append(mutation_distr, weighted)
 }
@@ -51,15 +50,3 @@ mean(snps_gamma$LL); mean(snps_lnorm$LL)
 param <- MASS::fitdistr(mutation_distr, "lognormal", lower=c(0,0))
 x <- seq(min(mutation_distr), max(mutation_distr), length.out = 1000)
 
-par(mfrow = c(1,1))
-
-plot(1~1, ylim = c(0,10), xlim = c(0,0.6), col = "white",
-     xlab = "SNPs per Generation", ylab = "Frequency")
-curve(dlnorm(x, meanlog =  -1.820404, sdlog = 0.3321436), add = TRUE,
-      col = "red")
-curve(dgamma(x, shape = 10.01941, rate = 58.80515), add = TRUE,
-      col = "blue")
-legend(x = "topright",          # Position
-       legend = c("Novel Method", "Clock Rate Method"),
-       lty = c(1,1),
-       col = c("blue", "red"))

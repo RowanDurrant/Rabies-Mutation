@@ -148,7 +148,7 @@ ggsave("plots/Figure 3 updated.png", bg = "transparent")
 
 
 #FIGURE 4
-tipDists = read.csv("output/pemba/full_bootstraps_100.csv")
+tipDists = read.csv("output/pemba/full_bootstraps_100_2022.csv")
 
 bw = 0.005
 n_obs = sum(!is.na(tipDists$snpsPerGen))
@@ -156,11 +156,11 @@ n_obs = sum(!is.na(tipDists$snpsPerGen))
 ggplot(data = data.frame(x = c(0, 0.5)), aes(x)) +
   geom_histogram(data= tipDists, aes(snpsPerGen), binwidth = bw, alpha=0.2, fill = "red")+
   stat_function(fun = function(x) 
-    dlnorm(x, meanlog =  -1.820404, sdlog = 0.3321436)* bw * n_obs, aes(colour = "Clock Rate Method"), size = 1.1) + 
+    dlnorm(x, meanlog =  -2.19029, sdlog = 0.9662017)* bw * n_obs, aes(colour = "Clock Rate Method"), size = 1.1) + 
   ylab("") +
   xlab("SNPs per Generation")+
   stat_function(fun= function(x)
-    dgamma(x, shape = 10.01941, rate = 58.80515)* bw * n_obs, aes(colour = "Novel Method"), size = 1.1) +
+    dgamma(x, shape = 10.03098, rate = 59.26635)* bw * n_obs, aes(colour = "Novel Method"), size = 1.1) +
   theme_bw() + xlim(0,0.5)+
   scale_color_manual(name='Prediction Method',
                      values=c('Clock Rate Method'='blue', 'Novel Method'='red'))+
@@ -169,10 +169,10 @@ ggplot(data = data.frame(x = c(0, 0.5)), aes(x)) +
         axis.ticks.y=element_blank())
 
 
-ggsave("plots/figure 4 with hist.png")
+ggsave("plots/figure 4 with hist 2022.png")
 
 #FIGURE 5
-tipDists = read.csv("output/pemba/full_bootstraps_100.csv") #change if you changed no. reps
+tipDists = read.csv("output/pemba/full_bootstraps_100_2022.csv") #change if you changed no. reps
 clusters = read.csv("input/Pemba_assignment.csv")
 alnDist = read.csv("output/pemba/snpdistancesall.csv")
 rownames(alnDist) <- alnDist[,1]
@@ -218,8 +218,8 @@ ggplot(data = lineageTipDists, aes(x = snpsPerGen)) +
   theme_bw() +
   ylab("Density") +
   xlab("SNPs per Generation")+
-  geom_vline(xintercept = 0.17, lty = 2)
-ggsave("plots/figure 5 vline updated.png")
+  geom_vline(xintercept = 0.1690, lty = 2)
+ggsave("plots/figure 5 vline updated 2022.png")
 
 #FIGURE 6
 
