@@ -93,14 +93,14 @@ ggplot(data = df2, aes(x = EquivalentPerGenRate, y = R_Squared)) +
   scale_x_continuous(breaks = c(0.05,0.1,0.2,0.5,1,2,3))+
   coord_trans(x='log10')+
   
-  xlab("Equivalent Per-Generation Mutation Rate (SNPs/Generation)") + ylab("R Squared")+
+  xlab("Equivalent Per-Generation Substitution Rate (SNPs/Generation)") + ylab("R Squared")+
   theme_bw() +
-  scale_colour_manual("", values = c("blue", "red")) +
+  scale_colour_manual("", values = c("red", "blue")) +
   scale_fill_manual(name='Mutation Model',
                     values=c('Time'='blue', 'Generation'='red')) +
   scale_linetype_manual("", values = c("solid", "dashed"))
 
-ggsave("plots/Figure 2 0.2 sampled only.png")
+ggsave("plots/Figure 2.png")
 
 #FIGURE 3 
 novelMethodAccuracy = read.csv("output/simulation/novel_method_accuracy.csv")
@@ -139,12 +139,12 @@ ggplot(Accuracy, aes(x = SNPRate, y = decimalAccuracy)) +
               fill = "red", alpha = 0.2) +
   scale_colour_manual("", values = c("blue", "red")) +
   scale_linetype_manual("", values = c("solid", "dashed")) +
-  xlab("Equivalent Per-Generation Mutation Rate (SNPs/Generation)")+
+  xlab("Equivalent Per-Generation Substitution Rate (SNPs/Generation)")+
   ylab("Accuracy") +
   scale_y_continuous(labels = scales::percent, limits = c(0,1))+
   theme_bw()
 
-ggsave("plots/Figure 3 updated.png", bg = "transparent")
+ggsave("plots/Figure 3.png", bg = "transparent")
 
 
 #FIGURE 4
@@ -156,7 +156,7 @@ n_obs = sum(!is.na(tipDists$snpsPerGen))
 ggplot(data = data.frame(x = c(0, 0.5)), aes(x)) +
   geom_histogram(data= tipDists, aes(snpsPerGen), binwidth = bw, alpha=0.2, fill = "red")+
   stat_function(fun = function(x) 
-    dlnorm(x, meanlog =  -2.19029, sdlog = 0.9662017)* bw * n_obs, aes(colour = "Clock Rate Method"), size = 1.1) + 
+    dlnorm(x, meanlog =  -2.231138, sdlog = 0.9662017)* bw * n_obs, aes(colour = "Clock Rate Method"), size = 1.1) + 
   ylab("") +
   xlab("SNPs per Generation")+
   stat_function(fun= function(x)
@@ -169,7 +169,7 @@ ggplot(data = data.frame(x = c(0, 0.5)), aes(x)) +
         axis.ticks.y=element_blank())
 
 
-ggsave("plots/figure 4 with hist 2022.png")
+ggsave("plots/Figure 4.png")
 
 #FIGURE 5
 tipDists = read.csv("output/pemba/full_bootstraps_100_2022.csv") #change if you changed no. reps
