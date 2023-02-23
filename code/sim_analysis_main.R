@@ -8,16 +8,16 @@ source("code/generations_calculation_function.R")
 densities= read_csv("output/simulation/densitiesSimParams.csv")
 densities = densities[,2:ncol(densities)]
 
-noCases = 500
+noCases = 100
 NoReps = 100
 genomeLength = 12000
 #perBaseRate = 0.2/12000
-timelimPercent = c(0,20)
+timelimPercent = c(0,100)
 
-sample(1:50, 1) #28
-seeds = 28
+#sample(1:50, 5) #9,28,29,31,35
+seeds = c(9,28,29,31,35)
 
-snpRate = c(1)
+snpRate = c(0.2,0.5,1,2,5)
 
 for(seed in seeds){
   for(perBaseRate in snpRate/genomeLength){
@@ -26,15 +26,16 @@ for(seed in seeds){
 }
 
 ##MAKE TREES WITH SEQUENCE OUTPUT BEFORE PROCEEDING
+#save tree csv in format "simSequences",seed,"_",noCases,"_",perBaseRate,"_strict.MCC.csv"
 
-for(seed in seeds[2:5]){
+for(seed in seeds){
   for(perBaseRate in snpRate/genomeLength){
     source("code/prep_sim_trees.R")
   }
 }
 
-for(seed in seeds[2:5]){
-  for(NoReps in c(100)){
+for(seed in seeds){
+  for(NoReps in c(10)){
     for(perBaseRate in snpRate/genomeLength){
       
       source("code/sim_calcs.R")
@@ -48,7 +49,7 @@ accuracy =  setNames(data.frame(matrix(ncol = 9, nrow = 0)),
                            c("NoReps","NoCases", "perBaseRate", "SNPRate", "predictedSNPs",
                              "predictedGens", "actualGens", "SNPsAccuracy", "GensAccuracy"))
 for(seed in seeds){
-  for(NoReps in c(100)){
+  for(NoReps in c(10)){
     for(perBaseRate in snpRate/genomeLength){
       for(noCases in c(100)){
         accuracy2 =  setNames(data.frame(matrix(ncol = 9, nrow = 1)), 
@@ -71,7 +72,9 @@ for(seed in seeds){
     }
   }
 }
+write.csv(accuracy, "output/simulation/novel_method_accuracy.csv")
 
+#needs generating by hand bc need to get clock rate from tracer
 clockRateMethodAccuracy = read.csv("output/simulation/clockrate_method_accuracy.csv")
 
 plot(data = accuracy, SNPsAccuracy ~ SNPRate, pch = 16, col = "blue", xlab = "Input SNPs/generation", 

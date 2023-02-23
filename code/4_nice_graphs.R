@@ -3,7 +3,7 @@ library(ggplot2)
 library(patchwork)
 library(scales)
 
-#FIGURE 1
+#FIGURE 2
 library(stringr)
 startSeq = paste(rep("a",12000), collapse = "")
 files = c("output/simulation/simsampledtips_perGen_24_0.000166666666666667_124_621.7.csv",
@@ -57,7 +57,7 @@ for(f in 1:length(files)){
 }
 
 
-#FIGURE 2
+#FIGURE 3
 df = read.csv("output/simulation/clockrate-gen-model-comparison.csv")
 df = df[is.na(df$Method) == F,]
 
@@ -100,9 +100,9 @@ ggplot(data = df2, aes(x = EquivalentPerGenRate, y = R_Squared)) +
                     values=c('Time'='blue', 'Generation'='red')) +
   scale_linetype_manual("", values = c("solid", "dashed"))
 
-ggsave("plots/Figure 2.png")
+ggsave("plots/Figure 3.png")
 
-#FIGURE 3 
+#FIGURE 4 
 novelMethodAccuracy = read.csv("output/simulation/novel_method_accuracy.csv")
 novelMethodAccuracy$Method = "Novel Method"
 clockRateMethodAccuracy = read.csv("output/simulation/clockrate_method_accuracy.csv")
@@ -144,10 +144,28 @@ ggplot(Accuracy, aes(x = SNPRate, y = decimalAccuracy)) +
   scale_y_continuous(labels = scales::percent, limits = c(0,1))+
   theme_bw()
 
-ggsave("plots/Figure 3.png", bg = "transparent")
+ggsave("plots/Figure 4.png", bg = "transparent")
 
+#stats
+clock02 = clockRateMethodAccuracy$SNPsAccuracy[clockRateMethodAccuracy$SNPRate == 0.2]
+clock05 = clockRateMethodAccuracy$SNPsAccuracy[clockRateMethodAccuracy$SNPRate == 0.5]
+clock1 = clockRateMethodAccuracy$SNPsAccuracy[clockRateMethodAccuracy$SNPRate == 1]
+clock2 = clockRateMethodAccuracy$SNPsAccuracy[clockRateMethodAccuracy$SNPRate == 2]
+clock5 = clockRateMethodAccuracy$SNPsAccuracy[clockRateMethodAccuracy$SNPRate == 5]
 
-#FIGURE 4
+novel02 = novelMethodAccuracy$SNPsAccuracy[novelMethodAccuracy$SNPRate == 0.2]
+novel05 = novelMethodAccuracy$SNPsAccuracy[novelMethodAccuracy$SNPRate == 0.5]
+novel1 = novelMethodAccuracy$SNPsAccuracy[novelMethodAccuracy$SNPRate == 1]
+novel2 = novelMethodAccuracy$SNPsAccuracy[novelMethodAccuracy$SNPRate == 2]
+novel5 = novelMethodAccuracy$SNPsAccuracy[novelMethodAccuracy$SNPRate == 5]
+
+t.test(clock02,novel02)
+t.test(clock05,novel05)
+t.test(clock1,novel1)
+t.test(clock2,novel2)
+t.test(clock5,novel5)
+
+#FIGURE 5
 tipDists = read.csv("output/pemba/full_bootstraps_100_2022.csv")
 
 bw = 0.005
@@ -169,9 +187,9 @@ ggplot(data = data.frame(x = c(0, 0.5)), aes(x)) +
         axis.ticks.y=element_blank())
 
 
-ggsave("plots/Figure 4.png")
+ggsave("plots/Figure 5.png")
 
-#FIGURE 5
+#FIGURE 6
 tipDists = read.csv("output/pemba/full_bootstraps_100_2022.csv") #change if you changed no. reps
 clusters = read.csv("input/Pemba_assignment.csv")
 alnDist = read.csv("output/pemba/snpdistancesall.csv")
@@ -219,9 +237,9 @@ ggplot(data = lineageTipDists, aes(x = snpsPerGen)) +
   ylab("Density") +
   xlab("SNPs per Generation")+
   geom_vline(xintercept = 0.1690, lty = 2)
-ggsave("plots/figure 5 vline updated 2022.png")
+ggsave("plots/figure 6 vline updated 2022.png")
 
-#FIGURE 6
+#FIGURE 7
 
 simTipDists = read.csv("output/simulation/full_bootstraps_sim_24_1.41666666666667e-05_166_150_timescaled.csv")
 simTipDists$TimeDiffYears = simTipDists$TimeDiff / 365

@@ -1,8 +1,3 @@
-seed = 28
-perBaseRate = 1.66666666666667e-05
-noCases = 100
-timelimPercent = c(0,2546.39977097979)
-
 treeYearsUnpaired = read.csv(paste0("output/simulation/simsampledtips",seed,perBaseRate,noCases,timelimPercent[1],timelimPercent[2],".csv"))
 treeYearsUnpaired = treeYearsUnpaired[,2:ncol(treeYearsUnpaired)]
 tips = unique(treeYearsUnpaired$caseID)

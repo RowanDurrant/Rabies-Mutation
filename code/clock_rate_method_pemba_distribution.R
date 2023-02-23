@@ -2,7 +2,7 @@ library(fitdistrplus)
 
 meanClockRate = 1.903E-04
 
-meanClockRate*11923*(27.7/365)
+meanClockRate*11923*(28.4/365)
 
 SI_meanlog <- 2.85
 SI_sdlog <-  0.966

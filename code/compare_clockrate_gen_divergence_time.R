@@ -1,3 +1,5 @@
+# files are in old repo
+
 library(stringr)
 perTimeRates = c(0.1/(12000*26.3), 0.2/(12000*26.3), 0.5/(12000*26.3), 1/(12000*26.3), 
                  2/(12000*26.3),0.05/(12000*26.3), 0.15/(12000*26.3), 0.25/(12000*26.3), 
@@ -26,7 +28,6 @@ for(noCases in caseSizes){
     for(k in perBaseRates){
       if(file.exists(paste0("output/simulation/simsampledtips_perGen_24_",k,"_",g,"_",noCases,".csv"))){
         samples = read.csv(paste0("output/simulation/simsampledtips_perGen_24_",k,"_",g,"_",noCases,".csv"))
-        
         time = rep(NA, nrow(samples))
         divergence = rep(NA, nrow(samples))
         for(i in 1:nrow(samples)){
@@ -54,7 +55,6 @@ for(noCases in caseSizes){
     for(j in perTimeRates){
         if(file.exists(paste0("output/simulation/simsampledtips_perfectClockRate_24_",j,"_",g,"_",noCases,".csv"))){
           samples = read.csv(paste0("output/simulation/simsampledtips_perfectClockRate_24_",j,"_",g,"_",noCases,".csv"))
-          
           time = rep(NA, nrow(samples))
           divergence = rep(NA, nrow(samples))
           for(i in 1:nrow(samples)){
@@ -84,7 +84,7 @@ for(noCases in caseSizes){
   }
 }
 
-write.csv(df, "output/simulation/clockrate-gen-model-comparison.csv")
+write.csv(df, "C:/Users/User/Documents/GitHub/Rabies-Mutation/output/simulation/clockrate-gen-model-comparison.csv")
 #df=read.csv("output/simulation/clockrate-gen-model-comparison.csv")
 df = df[is.na(df$Method) == F,]
 # par(mfrow = c(2,2))
@@ -103,10 +103,6 @@ ggplot(data = df, aes(x = EquivalentPerGenRate, y = R_Squared, colour = Method))
   xlab("Equivalent Per-Generation Mutation Rate") + ylab("R Squared")+
   facet_wrap( ~PercentSampled) +
   theme_bw() +
-  theme(panel.background = element_rect(fill='transparent'),
-        plot.background = element_rect(fill='transparent', color=NA),
-        legend.background = element_rect(fill='transparent'),
-        legend.box.background = element_rect(fill='transparent'))+
   scale_color_manual(name='Mutation Model',
                      values=c('Clock Rate'='blue', 'Generation'='red'))
-ggsave("time divergence transparent.png", bg = "transparent")
+ggsave("C:/Users/User/Documents/GitHub/Rabies-Mutation/plots/Supp Fig 1.png")
