@@ -66,7 +66,9 @@ p1 = ggplot(data=df, aes(x=gens, y=Mean, fill = Method)) +
         axis.ticks.x=element_blank(),
         plot.title = element_text(hjust = 0.5),
         legend.position = "none")+
-  coord_cartesian(xlim = c(0, 10)) + ylim(0,1)
+  coord_cartesian(xlim = c(0, 10)) + ylim(0,1)+
+  scale_fill_manual(name='Prediction Method',
+                     values=c('Clock Rate'='blue', 'Novel'='red'))
 ##FIVE GENS                 
 
 clock_0= dpois(0, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017)*5)
@@ -132,7 +134,9 @@ p2 = ggplot(data=df, aes(x=gens, y=Mean, fill = Method)) +
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank(),
         plot.title = element_text(hjust = 0.5))+
-  coord_cartesian(xlim = c(0, 10)) + ylim(0,1)
+  coord_cartesian(xlim = c(0, 10)) + ylim(0,1)+
+  scale_fill_manual(name='Prediction Method',
+                    values=c('Clock Rate'='blue', 'Novel'='red'))
 
 
 
@@ -201,7 +205,9 @@ p3 = ggplot(data=df, aes(x=gens, y=Mean, fill = Method)) +
         plot.title = element_text(hjust = 0.5),
         legend.position = "none")+
   coord_cartesian(xlim = c(0, 10)) + ylim(0,1) +
-  scale_x_continuous(breaks = c(0:10), labels = c("0":"10"))
+  scale_x_continuous(breaks = c(0:10), labels = c("0":"10"))+
+  scale_fill_manual(name='Prediction Method',
+                    values=c('Clock Rate'='blue', 'Novel'='red'))
 
 
 p1/p2/p3
