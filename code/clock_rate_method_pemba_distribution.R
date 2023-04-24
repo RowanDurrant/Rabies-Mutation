@@ -1,25 +1,6 @@
 library(fitdistrplus)
 
-meanClockRate = 1.903E-04
-
-meanClockRate*11923*(28.4/365)
-
-SI_meanlog <- 2.85
-SI_sdlog <-  0.966
-
-max_time = 1:1000
-
-curve = c()
-for(i in max_time){
-  curve[i] = dlnorm(i, SI_meanlog, sdlog = SI_sdlog)
-}
-
-mutation_distr = c()
-for(j in max_time){
-  mutation_time = meanClockRate*11923*(j/365)
-  weighted = rep(mutation_time, curve[j]/min(curve))
-  mutation_distr = append(mutation_distr, weighted)
-}
+mutation_distr = read.csv("output/pemba/multiplied_posteriors.csv")$x
 
 runs = rep(NA, 10)
 snps_gamma = data.frame(shape = runs, rate = runs, aic = runs, LL = runs)
@@ -47,6 +28,6 @@ mean(snps_gamma$aic); mean(snps_lnorm$aic)
 median(snps_gamma$aic); median(snps_lnorm$aic)
 mean(snps_gamma$LL); mean(snps_lnorm$LL)
 
-param <- MASS::fitdistr(mutation_distr, "lognormal", lower=c(0,0))
+param <- MASS::fitdistr(mutation_distr, "gamma", lower=c(0,0))
 x <- seq(min(mutation_distr), max(mutation_distr), length.out = 1000)
 

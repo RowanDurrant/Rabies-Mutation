@@ -18,7 +18,7 @@ branches = c(71,83,124,156,166,179,191,269,271)
     
     
     for(g in branches){
-      load(paste0("C:/Users/User/Desktop/PhD/Elaine sims/sims/seed",k,".Rdata"))
+      load(paste0("input/EF_simulations/seed",k,".Rdata"))
       outMatrix = as.data.frame(out$caseMat)
       outMatrix = outMatrix[order(outMatrix$caseID),]
       initialInfections = outMatrix$caseID[outMatrix$parentID == 0]
