@@ -36,9 +36,6 @@ for(noCases in caseSizes){
           
         }
          ml = lm(divergence ~ 0 + time)
-        # png(file = paste("Gen",noCases/nrow(outMatrix), k*12000, ".png"))
-         #plot(divergence ~ time, main = paste(noCases/nrow(outMatrix), k*12000, "Generation"))
-         #abline(reg = ml, col = "red")
         r_squared = summary(ml)$r.squared
     
         df2 = data.frame(Method = "Generation",
@@ -63,10 +60,6 @@ for(noCases in caseSizes){
             
           }
           ml = lm(divergence ~ 0 + time)
-          #png(file = paste("ClockRate",noCases/nrow(outMatrix), j*12000*26.3, ".png"))
-          #plot(divergence ~ time, main = paste(noCases/nrow(outMatrix), j*12000*26.3, "Clock Rate"))
-          #abline(reg = ml, col = "red")
-         # dev.off()
           r_squared = summary(ml)$r.squared
       
           df2 = data.frame(Method = "Clock Rate",
@@ -84,25 +77,4 @@ for(noCases in caseSizes){
   }
 }
 
-write.csv(df, "C:/Users/User/Documents/GitHub/Rabies-Mutation/output/simulation/clockrate-gen-model-comparison.csv")
-# #df=read.csv("output/simulation/clockrate-gen-model-comparison.csv")
-# df = df[is.na(df$Method) == F,]
-# par(mfrow = c(2,2))
-# for(i in c(0.01, 0.05, 0.1, 0.2)){
-#   df3 = df[df$PercentSampled == i,]
-#   plot(df3$R_Squared ~ df3$EquivalentPerGenRate,
-#        col = as.factor(df3$Method),
-#        pch = 16,
-#        main = i)
-# }
-# 
-# 
-# ggplot(data = df, aes(x = EquivalentPerGenRate, y = R_Squared, colour = Method)) +
-#   geom_point() +
-#   geom_smooth(se=F) +
-#   xlab("Equivalent Per-Generation Mutation Rate") + ylab("R Squared")+
-#   facet_wrap( ~PercentSampled) +
-#   theme_bw() +
-#   scale_color_manual(name='Mutation Model',
-#                      values=c('Clock Rate'='blue', 'Generation'='red'))
-# ggsave("C:/Users/User/Documents/GitHub/Rabies-Mutation/plots/Supp Fig 1.png")
+write.csv(df, "output/simulation/clockrate-gen-model-comparison.csv")
