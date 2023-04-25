@@ -3,10 +3,6 @@ library(readr)
 library(seqinr)
 library(ape)
 source("code/mutations_function.R")
-source("code/generations_calculation_function.R") 
-
-densities= read_csv("output/simulation/densitiesSimParams.csv")
-densities = densities[,2:ncol(densities)]
 
 noCases = 100
 NoReps = 100
@@ -24,13 +20,6 @@ for(seed in seeds){
 }
 
 ##MAKE TREES WITH SEQUENCE OUTPUT BEFORE PROCEEDING
-#save tree csv in format "simSequences",seed,"_",noCases,"_",perBaseRate,"_strict.MCC.csv"
-
-for(seed in seeds){
-  for(perBaseRate in snpRate/genomeLength){
-    source("code/2_prep_sim_trees.R")
-  }
-}
 
 for(seed in seeds){
   for(NoReps in NoReps){
