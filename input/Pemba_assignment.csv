@@ -1,5 +1,5 @@
 "ID","lineage","lineage_countries_seen","lineage_first_seen","lineage_last_seen"
-"RV2792_07-01-2011_Serengeti.fasta","Cosmopolitan_G1","Tanzania",2010,2013
+"RV2792_07-01-2011_Serengeti.fasta","Cosmopolitan AF1b_F1.1","Kenya",2021,2021
 "RV2799_29-01-2011_Serengeti.fasta","Cosmopolitan AF1b_B1.1","Tanzania",2010,2018
 "RV3075_31-01-2013_Serengeti.fasta","Cosmopolitan AF1b_B1.1","Tanzania",2010,2018
 "RV2794_12-01-2011_Serengeti.fasta","Cosmopolitan AF1b_B1.1","Tanzania",2010,2018
@@ -57,8 +57,8 @@
 "RV2501_14-02-2004_Serengeti.fasta","Cosmopolitan AF1b_A1.1.1","Tanzania",2008,2018
 "RV3128_16-06-2012_Serengeti.fasta","Cosmopolitan AF1b_B1","Tanzania",2004,2012
 "RV3117_12-05-2012_Serengeti.fasta","Cosmopolitan AF1b_B1","Tanzania",2004,2012
-"SD670_11-04-2017_Serengeti.fasta","Cosmopolitan AF1b_B1","Tanzania",2004,2012
-"RV3132_02-04-2012_Serengeti.fasta","Cosmopolitan AF1b_B1","Tanzania",2004,2012
+"SD670_11-04-2017_Serengeti.fasta","Cosmopolitan AF1b_E1","Tanzania",2017,2021
+"RV3132_02-04-2012_Serengeti.fasta","Cosmopolitan AF1b_E1","Tanzania",2017,2021
 "RV3050_02-09-2012_Serengeti.fasta","Cosmopolitan AF1b_B1.3","Tanzania",2010,2013
 "RV3138_16-07-2012_Serengeti.fasta","Cosmopolitan AF1b_B1.3","Tanzania",2010,2013
 "RV3070_27-02-2013_Serengeti.fasta","Cosmopolitan AF1b_B1.3","Tanzania",2010,2013
@@ -80,8 +80,8 @@
 "RV3085_06-09-2013_Serengeti.fasta","Cosmopolitan AF1b_B1.3","Tanzania",2010,2013
 "RV2888_29-07-2011_Serengeti.fasta","Cosmopolitan AF1b_B1.3","Tanzania",2010,2013
 "SD645_30-12-2016_Serengeti.fasta","Cosmopolitan AF1b_B1.3","Tanzania",2010,2013
-"SD678_06-10-2016_Serengeti.fasta","Cosmopolitan AF1b_B1.3","Tanzania",2010,2013
-"RV3107_09-04-2012_Serengeti.fasta","Cosmopolitan AF1b_B1.3","Tanzania",2010,2013
+"SD678_06-10-2016_Serengeti.fasta","Cosmopolitan AF1b_A1.1.3","Tanzania",2004,2021
+"RV3107_09-04-2012_Serengeti.fasta","Cosmopolitan AF1b_A1.1.3","Tanzania",2004,2021
 "RV3122_30-03-2012_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
 "RV3124_07-05-2012_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
 "RV3109_12-04-2012_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
@@ -91,32 +91,29 @@
 "RV3104_22-12-2011_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
 "RV3151_03-01-2012_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
 "RV3105_22-03-2012_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"RV3078_26-05-2013_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"RV3092_16-12-2011_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"RV3093_22-12-2011_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"SD577_30-09-2015_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"SD577sg_30-09-2015_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"RV3240_22-05-2015_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"RAB12005_09-05-2012_Pemba.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"SD647_18-08-2016_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"RV3253_04-06-2015_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"SD648_31-03-2017_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"SUB7101_24-09-2015_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"RAB12002_15-06-2012_Pemba.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"RAB12039_24-08-2011_Pemba.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"RV3229_05-01-2015_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"SD635_07-06-2016_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"SD643_14-05-2017_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"SD601_17-12-2015_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"SD681_08-09-2017_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"SD622_15-02-2016_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"SD620_20-02-2016_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"PM018_17-02-2017_Pemba.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"RV2485_28-09-2008_Serengeti.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"RV2866_15-04-2011_Serengeti.fasta","Cosmopolitan AF1b_A1.1.1","Tanzania",2008,2018
-"RAB16033_07-10-2016_Pemba.fasta","Cosmopolitan AF1b_B1.1","Tanzania",2010,2018
-"PM015_09-11-2016_Pemba.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
-"RV2504_18-06-2003_Ngorongoro.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
+"RV3078_26-05-2013_Serengeti.fasta","Cosmopolitan AF1b_D1","Tanzania",2011,2021
+"RV3092_16-12-2011_Serengeti.fasta","Cosmopolitan AF1b_D1","Tanzania",2011,2021
+"RV3093_22-12-2011_Serengeti.fasta","Cosmopolitan AF1b_D1","Tanzania",2011,2021
+"SD577_30-09-2015_Serengeti.fasta","Cosmopolitan AF1b_D1","Tanzania",2011,2021
+"SD577sg_30-09-2015_Serengeti.fasta","Cosmopolitan AF1b_D1","Tanzania",2011,2021
+"RAB12002_15-06-2012_Pemba.fasta","Cosmopolitan AF1b_D1","Tanzania",2011,2021
+"RAB12039_24-08-2011_Pemba.fasta","Cosmopolitan AF1b_D1.1","Tanzania",2011,2017
+"RV3229_05-01-2015_Serengeti.fasta","Cosmopolitan AF1b_D1.1","Tanzania",2011,2017
+"SD643_14-05-2017_Serengeti.fasta","Cosmopolitan AF1b_D1.1","Tanzania",2011,2017
+"SD635_07-06-2016_Serengeti.fasta","Cosmopolitan AF1b_D1.1.1","Tanzania",2015,2017
+"SD648_31-03-2017_Serengeti.fasta","Cosmopolitan AF1b_D1.1","Tanzania",2011,2017
+"SD647_18-08-2016_Serengeti.fasta","Cosmopolitan AF1b_D1.1","Tanzania",2011,2017
+"RV3240_22-05-2015_Serengeti.fasta","Cosmopolitan AF1b_D1.1","Tanzania",2011,2017
+"RAB12005_09-05-2012_Pemba.fasta","Cosmopolitan AF1b_D1.1","Tanzania",2011,2017
+"RV3253_04-06-2015_Serengeti.fasta","Cosmopolitan AF1b_D1.1","Tanzania",2011,2017
+"SUB7101_24-09-2015_Serengeti.fasta","Cosmopolitan AF1b_D1.1","Tanzania",2011,2017
+"SD601_17-12-2015_Serengeti.fasta","Cosmopolitan AF1b_D1.1","Tanzania",2011,2017
+"SD681_08-09-2017_Serengeti.fasta","Cosmopolitan AF1b_D1.1","Tanzania",2011,2017
+"SD622_15-02-2016_Serengeti.fasta","Cosmopolitan AF1b_D1.1","Tanzania",2011,2017
+"SD620_20-02-2016_Serengeti.fasta","Cosmopolitan AF1b_D1","Tanzania",2011,2021
+"RV2773_26-10-2010_Kibaha.fasta","Cosmopolitan AF1b_D1.1.1","Tanzania",2015,2017
+"RV2485_28-09-2008_Serengeti.fasta","Cosmopolitan AF1b_A1.1.3","Tanzania",2004,2021
+"RV2504_18-06-2003_Ngorongoro.fasta","Cosmopolitan AF1b_A1.1.1","Tanzania",2008,2018
 "RV2783_28-02-2011_Newala.fasta","Cosmopolitan AF1b_A1.1.2","Tanzania",2003,2011
 "RV2778_15-12-2010_Pemba.fasta","Cosmopolitan AF1b_A1.1.2","Tanzania",2003,2011
 "RV2784_28-02-2011_Nachingwea.fasta","Cosmopolitan AF1b_C1","Tanzania",2009,2017
@@ -141,14 +138,17 @@
 "RV2949_17-07-2009_Dodoma.fasta","Cosmopolitan AF1b_A1.1.2","Tanzania",2003,2011
 "RV2861_11-05-2011_Serengeti.fasta","Cosmopolitan AF1b_A1.1.2","Tanzania",2003,2011
 "SD709_08-09-2017_Serengeti.fasta","Cosmopolitan AF1b_A1.1.2","Tanzania",2003,2011
+"RV2866_15-04-2011_Serengeti.fasta","Cosmopolitan AF1b_A1.1.2","Tanzania",2003,2011
+"RV2777_15-12-2010_Pemba.fasta","Cosmopolitan AF1b_B1","Tanzania",2004,2012
 "RV2811_24-04-2010_Morogoro.fasta","Cosmopolitan AF1b_A1.1.2","Tanzania",2003,2011
-"RV2777_15-12-2010_Pemba.fasta","Cosmopolitan AF1b_A1.1.2","Tanzania",2003,2011
-"PM019_05-02-2017_Pemba.fasta","Cosmopolitan AF1b_A1.1.2","Tanzania",2003,2011
-"PM024_14-05-2017_Pemba.fasta","Cosmopolitan AF1b_A1.1","c(""Tanzania"", ""Uganda"")",2009,2018
+"PM018_17-02-2017_Pemba.fasta","Cosmopolitan AF1b_A1.1","c(""Tanzania"", ""Uganda"")",2009,2018
+"PM019_05-02-2017_Pemba.fasta","Cosmopolitan AF1b_B1.1","Tanzania",2010,2018
+"RAB16033_07-10-2016_Pemba.fasta","Cosmopolitan AF1b_B1.1","Tanzania",2010,2018
+"PM015_09-11-2016_Pemba.fasta","Cosmopolitan AF1b_B1.2","Tanzania",2011,2017
+"PM024_14-05-2017_Pemba.fasta","Cosmopolitan_K1","Tanzania",1997,1997
 "RV2814_17-05-2010_Ulanga.fasta","Cosmopolitan_K1","Tanzania",1997,1997
 "RV2816_28-09-2010_Kilombero.fasta","Cosmopolitan AF1b_A1","c(""Rwanda"", ""Tanzania"")",1994,2010
 "RV2815_27-09-2010_Kilombero.fasta","Cosmopolitan AF1b_A1","c(""Rwanda"", ""Tanzania"")",1994,2010
 "RV2499_05-08-2008_Ulanga.fasta","Cosmopolitan AF1b_A1","c(""Rwanda"", ""Tanzania"")",1994,2010
 "RV2498_06-08-2008_Ulanga.fasta","Cosmopolitan AF1b_A1","c(""Rwanda"", ""Tanzania"")",1994,2010
 "RV2817_26-11-2010_Pemba.fasta","Cosmopolitan AF1b_A1","c(""Rwanda"", ""Tanzania"")",1994,2010
-"RV2773_26-10-2010_Kibaha.fasta","Cosmopolitan AF1b_A1","c(""Rwanda"", ""Tanzania"")",1994,2010
