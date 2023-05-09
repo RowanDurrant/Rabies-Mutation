@@ -77,8 +77,8 @@ d2$freq = NA
 tab = table(df$location)
 for(i in 1:nrow(d2)){
   d2$freq[i] = as.numeric(tab[d2$location[i]])
-  
 }
+
 
 tanzania = get_stamenmap(bbox = c(left = 33, bottom = -11, right =
                                     43, top = -1.5), zoom = 6, maptype = 'toner-lite')
@@ -98,6 +98,33 @@ library(ggpubr)
 ggarrange(p1, p2, labels = c("A", "B"), common.legend = TRUE, legend = "bottom")
 
 ggsave("plots/Figure 1.png")
+
+#FIG 1 PIE CHARTS
+require(rworldmap)
+require(rworldxtra)
+
+namevector =sort(unique(df$lineage))
+d2[,namevector] <- NA
+for(j in 1:nrow(d2)){
+  lineage_tab = table(df$lineage[df$location == d2$location[j]])
+  for(k in namevector){
+    d2[j,k] = lineage_tab[k]
+  }
+}
+
+p_tanzania_2 = mapPies(d2, nameX="long", 
+                     nameY="lat", 
+                     nameZs=namevector,
+                     xlim = c(35,40),
+                     ylim = c(-11, -1),
+                     oceanCol = "grey",
+                     landCol = "white",
+                     symbolSize = 5,
+                     zColours = c("#000000","#004949","#009292","#ff6db6","#ffb6db",
+                                  "#490092","#006ddb","#b66dff","#6db6ff","#b6dbff",
+                                  "#920000","#924900","#db6d00","#24ff24","#ffff6d",
+                                  "#555555", "#999999"),
+                     addCatLegend = F)
 
 #FIGURE 2
 library(stringr)

@@ -22,3 +22,10 @@ accuracy = log(predictedSNPRate/trueSNPRate)
 df = as.data.frame(cbind(trueSNPRate, predictedSNPRate, accuracy))
 write.csv(df, file = "output/simulation/clockrate_method_accuracy.csv")
 
+df = read.csv("output/simulation/clockrate_method_accuracy.csv")
+
+sqrt(mean(df$accuracy[df$trueSNPRate == 0.2]^2))
+sqrt(mean(df$accuracy[df$trueSNPRate == 0.5]^2))
+sqrt(mean(df$accuracy[df$trueSNPRate == 1]^2))
+sqrt(mean(df$accuracy[df$trueSNPRate == 2]^2))
+sqrt(mean(df$accuracy[df$trueSNPRate == 5]^2))
