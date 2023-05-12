@@ -151,13 +151,13 @@ for(f in 1:length(files)){
 p1 = ggplot(data = data_list[[1]], aes(x = Time, y = Divergence))+
   geom_point(colour = "red", shape = 16, alpha = 0.5,size = 2)+
   geom_point(data = data_list[[2]], aes(x = Time, y = Divergence), colour = "blue", 
-             alpha = 0.5,shape = 16, size = 2)+
+             alpha = 0.5,shape = 16, size = 2)+ ylim(0,0.0225)+
   theme_bw() + xlab("Time (Years)") + ylab("Divergence (subs./site)")
 
 p2 = ggplot(data = data_list[[3]], aes(x = Time, y = Divergence))+
   geom_point(colour = "red", shape = 16, alpha = 0.5,size = 2)+
   geom_point(data = data_list[[4]], aes(x = Time, y = Divergence), colour = "blue", 
-             alpha = 0.5,shape = 16, size = 2)+
+             alpha = 0.5,shape = 16, size = 2)+ ylim(0,0.00225)+
   theme_bw() + xlab("Time (Years)") + ylab("Divergence (subs./site)")
 
 df = read.csv("output/simulation/clockrate-gen-model-comparison.csv")
@@ -196,7 +196,7 @@ p3 = ggplot(data = df2, aes(x = EquivalentPerGenRate, y = R_Squared)) +
   scale_x_continuous(breaks = c(0.05,0.1,0.2,0.5,1,2,3))+
   coord_trans(x='log10')+
   
-  xlab("Equivalent Per-Generation Substitution Rate (SNPs/Generation)") + ylab("R Squared")+
+  xlab("Equivalent Per-Generation Substitution Rate (SNPs/Generation)") + ylab(expression(R^2))+
   theme_bw() +
   scale_colour_manual("", values = c("red", "blue")) +
   scale_fill_manual(name='Mutation Model',
