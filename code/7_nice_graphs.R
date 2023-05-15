@@ -1,8 +1,6 @@
 library(ggplot2)
 library(patchwork)
 library(scales)
-
-
 library(tidyverse)
 library(ggtree)
 library(treeio)
@@ -38,6 +36,7 @@ p2 = ggplot(data = df, aes(x = date, y = distance))  +
 p2 = p2+ annotate("text",
                   label = "x intercept = 1970.35",
                   x = 2005, y = 0.0165)
+
 #Phylogenetic tree
 tree = read.beast("../Pemba/data/genetic/pemba_tz_n153_timescaled.mcc.tre")
 tipcolours = c()
@@ -50,7 +49,6 @@ d <- data.frame(node=1:(Nnode(tree)+length(tree@phylo$tip.label)),
 
 p = ggtree(tree, mrsd="2018-01-01") + 
   theme_tree2() + 
-  #geom_tiplab(align=TRUE, linesize=.5, size = 3) + 
   xlim(1950, 2022)
 
 p = p %<+% d  +  
@@ -85,7 +83,6 @@ tanzania = get_stamenmap(bbox = c(left = 33, bottom = -11, right =
 
 p_tanzania = ggmap(tanzania) + 
   geom_point(data = d2, aes(x = long, y = lat, size=freq), colour = "red" , alpha=1) +
-  # scale_color_brewer("location", palette="Paired")+
   theme(axis.title = element_blank(), 
         axis.text  = element_blank(),
         axis.ticks = element_blank(),
@@ -172,9 +169,6 @@ library(betareg)
 gy_logit_generation = betareg(R_Squared ~ EquivalentPerGenRate, data = df2, subset = Method == "Generation")
 gy_logit_time = betareg(R_Squared ~ EquivalentPerGenRate, data = df2, subset = Method == "Time")
 
-#predict(gy_logit_time, newdata = df2, interval = 'prediction',
-#        type = "quantile", at = c(0.025, 0.975))
-
 mpi1 <- cbind(df2[df2$Method == "Generation",], predict(gy_logit_generation, newdata = df2, interval = 'prediction',
                                                         type = "quantile", at = c(0.025, 0.975)))
 
@@ -211,8 +205,6 @@ ggarrange(ggarrange(p1, p2, labels = c("A", "B")), p3, nrow = 2,
 ggsave("plots/Figure 2.png")
 
 #FIGURE 3
-#novelMethodAccuracy = read.csv("output/simulation/novel_method_accuracy.csv")
-#novelMethodAccuracy$Method = "Novel Method"
 Accuracy = read.csv("output/simulation/clockrate_method_accuracy.csv")
 library(ggplot2)
 ggplot(Accuracy, aes(x = trueSNPRate, y = accuracy)) +
@@ -232,18 +224,7 @@ clock05 = clockRateMethodAccuracy$SNPsAccuracy[clockRateMethodAccuracy$SNPRate =
 clock1 = clockRateMethodAccuracy$SNPsAccuracy[clockRateMethodAccuracy$SNPRate == 1]
 clock2 = clockRateMethodAccuracy$SNPsAccuracy[clockRateMethodAccuracy$SNPRate == 2]
 clock5 = clockRateMethodAccuracy$SNPsAccuracy[clockRateMethodAccuracy$SNPRate == 5]
-# 
-# novel02 = novelMethodAccuracy$SNPsAccuracy[novelMethodAccuracy$SNPRate == 0.2]
-# novel05 = novelMethodAccuracy$SNPsAccuracy[novelMethodAccuracy$SNPRate == 0.5]
-# novel1 = novelMethodAccuracy$SNPsAccuracy[novelMethodAccuracy$SNPRate == 1]
-# novel2 = novelMethodAccuracy$SNPsAccuracy[novelMethodAccuracy$SNPRate == 2]
-# novel5 = novelMethodAccuracy$SNPsAccuracy[novelMethodAccuracy$SNPRate == 5]
 
-# t.test(clock02,novel02)
-# t.test(clock05,novel05)
-# t.test(clock1,novel1)
-# t.test(clock2,novel2)
-# t.test(clock5,novel5)
 
 #FIGURE 4
 tipDists = read.csv("output/pemba/multiplied_posteriors.csv")
@@ -257,52 +238,23 @@ p4 = ggplot(data = data.frame(x = c(0, 0.35)), aes(x)) +
     dgamma(x, shape = 51.69189, rate = 301.8095)* bw * n_obs, colour = "darkgreen", size = 1.1) +
   ylab("") +
   xlab("SNPs per Generation")+
-#  stat_function(fun= function(x)
-#    dgamma(x, shape = 10.03098, rate = 59.26635)* bw * n_obs, aes(colour = "Novel Method"), size = 1.1) +
-  theme_bw() + xlim(0,0.35)#+
-#  scale_color_manual(name='Prediction Method',
- #                    values=c('Clock Rate Method'='blue', 'Novel Method'='red'))+
-  # theme(axis.title.y=element_blank(),
-  #       axis.text.y=element_blank(),
-  #       axis.ticks.y=element_blank(),
-  #       legend.position = "none")
+  theme_bw() + xlim(0,0.35)
 
 library(ggplot2)
 library(patchwork)
 library(Rmisc)
 
-#clock_0= dpois(0, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_0= dpois(0, rgamma(10000,shape = 51.69189, rate = 301.8095))
-#clock_1= dpois(1, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_1= dpois(1, rgamma(10000,shape = 51.69189, rate = 301.8095))
-#clock_2= dpois(2, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_2= dpois(2, rgamma(10000,shape = 51.69189, rate = 301.8095))
-#clock_3= dpois(3, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_3= dpois(3, rgamma(10000,shape = 51.69189, rate = 301.8095))
-#clock_4= dpois(4, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_4= dpois(4, rgamma(10000,shape = 51.69189, rate = 301.8095))
-#clock_5= dpois(5, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_5= dpois(5, rgamma(10000,shape = 51.69189, rate = 301.8095))
-#clock_6= dpois(6, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_6= dpois(6, rgamma(10000,shape = 51.69189, rate = 301.8095))
-#clock_7= dpois(7, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_7= dpois(7, rgamma(10000,shape = 51.69189, rate = 301.8095))
-#clock_8= dpois(8, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_8= dpois(8, rgamma(10000,shape = 51.69189, rate = 301.8095))
-#clock_9= dpois(9, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_9= dpois(9, rgamma(10000,shape = 51.69189, rate = 301.8095))
-#clock_10= dpois(10, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_10= dpois(10, rgamma(10000,shape = 51.69189, rate = 301.8095))
-
-# clock_means = c(mean(clock_0),mean(clock_1),mean(clock_2),mean(clock_3),mean(clock_4),
-#                 mean(clock_5),mean(clock_6),mean(clock_7),mean(clock_8),mean(clock_9),
-#                 mean(clock_10))
-# clock_CI_upper = unname(c(CI(clock_0)[1],CI(clock_1)[1],CI(clock_2)[1],CI(clock_3)[1],CI(clock_4)[1],
-#                           CI(clock_5)[1],CI(clock_6)[1],CI(clock_7)[1],CI(clock_8)[1],CI(clock_9)[1],
-#                           CI(clock_10)[1]))
-# clock_CI_lower = unname(c(CI(clock_0)[3],CI(clock_1)[3],CI(clock_2)[3],CI(clock_3)[3],CI(clock_4)[3],
-#                           CI(clock_5)[3],CI(clock_6)[3],CI(clock_7)[3],CI(clock_8)[3],CI(clock_9)[3],
-#                           CI(clock_10)[3]))
 
 clock_means = c(mean(novel_0),mean(novel_1),mean(novel_2),mean(novel_3),mean(novel_4),
                 mean(novel_5),mean(novel_6),mean(novel_7),mean(novel_8),mean(novel_9),
@@ -336,42 +288,20 @@ p1 = ggplot(data=df, aes(x=gens, y=Mean)) +
         plot.title = element_text(hjust = 0.5),
         legend.position = "none")+
   coord_cartesian(xlim = c(0, 10)) + ylim(0,1)
- # scale_fill_manual(name='Prediction Method',
-#                    values=c('Clock Rate'='blue', 'Novel'='red'))
-##FIVE GENS                 
 
-#clock_0= dpois(0, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
+##FIVE GENS                 
 novel_0= dpois(0, rgamma(10000,shape = 51.69189, rate = 301.8095)*5)
-#clock_1= dpois(1, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_1= dpois(1, rgamma(10000,shape = 51.69189, rate = 301.8095)*5)
-#clock_2= dpois(2, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_2= dpois(2, rgamma(10000,shape = 51.69189, rate = 301.8095)*5)
-#clock_3= dpois(3, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_3= dpois(3, rgamma(10000,shape = 51.69189, rate = 301.8095)*5)
-#clock_4= dpois(4, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_4= dpois(4, rgamma(10000,shape = 51.69189, rate = 301.8095)*5)
-#clock_5= dpois(5, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_5= dpois(5, rgamma(10000,shape = 51.69189, rate = 301.8095)*5)
-#clock_6= dpois(6, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_6= dpois(6, rgamma(10000,shape = 51.69189, rate = 301.8095)*5)
-#clock_7= dpois(7, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_7= dpois(7, rgamma(10000,shape = 51.69189, rate = 301.8095)*5)
-#clock_8= dpois(8, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_8= dpois(8, rgamma(10000,shape = 51.69189, rate = 301.8095)*5)
-#clock_9= dpois(9, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_9= dpois(9, rgamma(10000,shape = 51.69189, rate = 301.8095)*5)
-#clock_10= dpois(10, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_10= dpois(10, rgamma(10000,shape = 51.69189, rate = 301.8095)*5)
 
-# clock_means = c(mean(clock_0),mean(clock_1),mean(clock_2),mean(clock_3),mean(clock_4),
-#                 mean(clock_5),mean(clock_6),mean(clock_7),mean(clock_8),mean(clock_9),
-#                 mean(clock_10))
-# clock_CI_upper = unname(c(CI(clock_0)[1],CI(clock_1)[1],CI(clock_2)[1],CI(clock_3)[1],CI(clock_4)[1],
-#                           CI(clock_5)[1],CI(clock_6)[1],CI(clock_7)[1],CI(clock_8)[1],CI(clock_9)[1],
-#                           CI(clock_10)[1]))
-# clock_CI_lower = unname(c(CI(clock_0)[3],CI(clock_1)[3],CI(clock_2)[3],CI(clock_3)[3],CI(clock_4)[3],
-#                           CI(clock_5)[3],CI(clock_6)[3],CI(clock_7)[3],CI(clock_8)[3],CI(clock_9)[3],
-#                           CI(clock_10)[3]))
 
 clock_means = c(mean(novel_0),mean(novel_1),mean(novel_2),mean(novel_3),mean(novel_4),
                 mean(novel_5),mean(novel_6),mean(novel_7),mean(novel_8),mean(novel_9),
@@ -405,45 +335,22 @@ p2 = ggplot(data=df, aes(x=gens, y=Mean)) +
         plot.title = element_text(hjust = 0.5),
         legend.position = "none")+
   coord_cartesian(xlim = c(0, 10)) + ylim(0,1)
- # scale_fill_manual(name='Prediction Method',
-#                    values=c('Clock Rate'='blue', 'Novel'='red'))
-
 
 
 ##TEN GENS
 
-#clock_0= dpois(0, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_0= dpois(0, rgamma(10000,shape = 51.69189, rate = 301.8095)*10)
-#clock_1= dpois(1, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_1= dpois(1, rgamma(10000,shape = 51.69189, rate = 301.8095)*10)
-#clock_2= dpois(2, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_2= dpois(2, rgamma(10000,shape = 51.69189, rate = 301.8095)*10)
-#clock_3= dpois(3, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_3= dpois(3, rgamma(10000,shape = 51.69189, rate = 301.8095)*10)
-#clock_4= dpois(4, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_4= dpois(4, rgamma(10000,shape = 51.69189, rate = 301.8095)*10)
-#clock_5= dpois(5, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_5= dpois(5, rgamma(10000,shape = 51.69189, rate = 301.8095)*10)
-#clock_6= dpois(6, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_6= dpois(6, rgamma(10000,shape = 51.69189, rate = 301.8095)*10)
-#clock_7= dpois(7, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_7= dpois(7, rgamma(10000,shape = 51.69189, rate = 301.8095)*10)
-#clock_8= dpois(8, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_8= dpois(8, rgamma(10000,shape = 51.69189, rate = 301.8095)*10)
-#clock_9= dpois(9, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_9= dpois(9, rgamma(10000,shape = 51.69189, rate = 301.8095)*10)
-#clock_10= dpois(10, rlnorm(10000,meanlog =  -2.231138, sdlog = 0.9662017))
 novel_10= dpois(10, rgamma(10000,shape = 51.69189, rate = 301.8095)*10)
 
-# clock_means = c(mean(clock_0),mean(clock_1),mean(clock_2),mean(clock_3),mean(clock_4),
-#                 mean(clock_5),mean(clock_6),mean(clock_7),mean(clock_8),mean(clock_9),
-#                 mean(clock_10))
-# clock_CI_upper = unname(c(CI(clock_0)[1],CI(clock_1)[1],CI(clock_2)[1],CI(clock_3)[1],CI(clock_4)[1],
-#                           CI(clock_5)[1],CI(clock_6)[1],CI(clock_7)[1],CI(clock_8)[1],CI(clock_9)[1],
-#                           CI(clock_10)[1]))
-# clock_CI_lower = unname(c(CI(clock_0)[3],CI(clock_1)[3],CI(clock_2)[3],CI(clock_3)[3],CI(clock_4)[3],
-#                           CI(clock_5)[3],CI(clock_6)[3],CI(clock_7)[3],CI(clock_8)[3],CI(clock_9)[3],
-#                           CI(clock_10)[3]))
 
 clock_means = c(mean(novel_0),mean(novel_1),mean(novel_2),mean(novel_3),mean(novel_4),
                 mean(novel_5),mean(novel_6),mean(novel_7),mean(novel_8),mean(novel_9),
@@ -475,8 +382,7 @@ p3 = ggplot(data=df, aes(x=gens, y=Mean)) +
         legend.position = "bottom")+
   coord_cartesian(xlim = c(0, 10)) + ylim(0,1) +
   scale_x_continuous(breaks = c(0:10), labels = c("0":"10"))
- # scale_fill_manual(name='Prediction Method',
-  #                  values=c('Clock Rate'='blue', 'Novel'='red'))
+
 library(ggpubr)
 
 p5 = p1/p2/p3

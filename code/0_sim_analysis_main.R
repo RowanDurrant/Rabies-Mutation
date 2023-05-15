@@ -4,18 +4,20 @@ library(seqinr)
 library(ape)
 source("code/mutations_function.R")
 
-noCases = 100
+noCases = c(25, 50, 100, 150, 200)
 NoReps = 100
 genomeLength = 12000
 timelimPercent = c(0,100)
 
 seeds = c(9,28,29,31,35)
 
-snpRate = c(0.2,0.5,1,2,5)
+snpRate = c(0.2)
 
 for(seed in seeds){
   for(perBaseRate in snpRate/genomeLength){
-    source("code/1_sim_output_prep.R")
+    for(noCases in noCases){
+          source("code/1_sim_output_prep.R")
+    }
   }
 }
 
@@ -24,8 +26,9 @@ for(seed in seeds){
 for(seed in seeds){
   for(NoReps in NoReps){
     for(perBaseRate in snpRate/genomeLength){
-      
-      source("code/3_compare_clockrate_gen_divergence_time.R")
+      for(noCases in noCases){
+        source("code/3_compare_clockrate_gen_divergence_time.R")
+      }
     }
   }
 }
