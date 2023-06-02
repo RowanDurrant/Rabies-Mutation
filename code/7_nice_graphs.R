@@ -208,6 +208,11 @@ ggsave("plots/Figure 2.png")
 Accuracy = read.csv("output/simulation/clockrate_method_accuracy.csv")
 library(ggplot2)
 library(viridis)
+
+percent.labs <- c("1% of cases sequenced", "5% of cases sequenced", "10% of cases sequenced",
+                  "20% of cases sequenced")
+names(percent.labs) <- c(0.01, 0.05, 0.1, 0.2)
+
 ggplot(Accuracy, aes(x = trueSNPRate, y = accuracy, colour = no_cases)) +
   geom_point(
     #colour = "palegreen4",
@@ -220,7 +225,7 @@ ggplot(Accuracy, aes(x = trueSNPRate, y = accuracy, colour = no_cases)) +
   theme_bw() + 
   coord_trans(x = "log") +
   scale_color_viridis(name = "No. sequences",trans = "log", breaks = c(20,150,1000)) +
-  facet_wrap(~percent_sampled)
+  facet_wrap(~percent_sampled,  labeller = labeller(percent_sampled = percent.labs))
 
 ggsave("plots/Figure 3.png")
 
