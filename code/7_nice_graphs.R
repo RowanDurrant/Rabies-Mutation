@@ -207,14 +207,20 @@ ggsave("plots/Figure 2.png")
 #FIGURE 3
 Accuracy = read.csv("output/simulation/clockrate_method_accuracy.csv")
 library(ggplot2)
-ggplot(Accuracy, aes(x = trueSNPRate, y = accuracy)) +
-  geom_point(colour = "palegreen4", shape = 16) +
-  ylim(-1, 1)+
+library(viridis)
+ggplot(Accuracy, aes(x = trueSNPRate, y = accuracy, colour = no_cases)) +
+  geom_point(
+    #colour = "palegreen4",
+    alpha = 0.75,
+    shape = 16) +
+  #ylim(-1, max(Accuracy$accuracy)+0.1)+
   geom_hline(yintercept = 0, linetype = "dotted")+
   xlab("Equivalent Per-Generation Substitution Rate (SNPs/Generation)")+
   ylab("Accuracy (natural log of the ratio)") +
-  theme_bw() + theme(legend.position = "none") +
-  coord_trans(x = "log")
+  theme_bw() + 
+  coord_trans(x = "log") +
+  scale_color_viridis(name = "No. sequences",trans = "log", breaks = c(20,150,1000)) +
+  facet_wrap(~percent_sampled)
 
 ggsave("plots/Figure 3.png")
 

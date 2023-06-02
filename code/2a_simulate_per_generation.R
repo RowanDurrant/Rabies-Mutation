@@ -65,10 +65,6 @@ branches = c(71,83,124,156,166,179,191,269,271)
                     file.out = paste0("output/simulation/simsampledtips_perGen_",k,"_",perBaseRate,"_",g,"_",noCases,".fasta"), 
                     open = "w", nbchar = 60, as.string = F)
         
-   #     all.fasta=read.dna(paste0("output/simulation/simsampledtips_perGen_",k,"_",perBaseRate,"_",noCases,".fasta"), format = 'fasta')
-  #      alnDist <- dist.dna(all.fasta, model = "raw", as.matrix = TRUE, pairwise.deletion = T)
-        #write.csv(alnDist, paste0("output/simulation/simsampledsnpdists_perGen_",k,"_",perBaseRate,"_",noCases,".csv"))
-        
       }
      
       to = as.character(outMatrix$caseID)
