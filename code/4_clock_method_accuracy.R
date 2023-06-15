@@ -35,7 +35,7 @@ for(j in seeds){
           
           no_cases = append(no_cases, l)
           
-          clockRates = clockRates[1000:length(clockRates)] #burn in 
+          clockRates = clockRates[round(length(clockRates)*0.25):length(clockRates)] #25% burn in 
           clockRate = append(clockRate, mean(clockRates))
           SIs = rlnorm(length(clockRates), meanlog=2.96, sdlog=0.82)
           multipliedPosteriors = clockRates*SIs*12000

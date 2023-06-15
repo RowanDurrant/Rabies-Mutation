@@ -223,7 +223,7 @@ ggplot(Accuracy, aes(x = trueSNPRate, y = accuracy, colour = no_cases)) +
   xlab("Equivalent Per-Generation Substitution Rate (SNPs/Generation)")+
   ylab("Accuracy (natural log of the ratio)") +
   theme_bw() + 
-  coord_trans(x = "log") +
+  coord_trans(x = "log") + scale_x_continuous(breaks=c(0.05,0.1,0.25,0.5,1,2,3))+
   scale_color_viridis(name = "No. sequences",trans = "log", breaks = c(20,150,1000)) +
   facet_wrap(~percent_sampled,  labeller = labeller(percent_sampled = percent.labs))
 
