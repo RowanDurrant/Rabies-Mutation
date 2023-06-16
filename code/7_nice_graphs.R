@@ -38,7 +38,7 @@ p2 = p2+ annotate("text",
                   x = 2005, y = 0.0165)
 
 #Phylogenetic tree
-tree = read.beast("../Pemba/data/genetic/pemba_tz_n153_timescaled.mcc.tre")
+tree = read.beast("input/pemba_tz_n153_timescaled.mcc.tre")
 tipcolours = c()
 for(i in 1:length(tree@phylo$tip.label)){
   tipcolours[i] = df$lineage[df$tip == tree@phylo$tip.label[i]]
@@ -114,7 +114,7 @@ p_tanzania_2 = mapPies(d2, nameX="long",
                      nameZs=namevector,
                      xlim = c(35,40),
                      ylim = c(-11, -1),
-                     oceanCol = "grey",
+                     oceanCol = "lightblue",
                      landCol = "white",
                      symbolSize = 5,
                      zColours = c("#000000","#004949","#009292","#ff6db6","#ffb6db",
@@ -163,7 +163,7 @@ df = df[is.na(df$Method) == F,]
 
 library(ggplot2)
 
-df2 = df[df$PercentSampled == 0.2,]
+df2 = df[df$PercentSampled == 0.05,]
 df2$Method[df2$Method == "Clock Rate"] = "Time"
 library(betareg)
 gy_logit_generation = betareg(R_Squared ~ EquivalentPerGenRate, data = df2, subset = Method == "Generation")

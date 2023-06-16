@@ -62,9 +62,9 @@ for(perTimeRate in perTimeRates){
     for(noCases in percentCases*nrow(outMatrix)){
       sampledtips = tips[tips$caseID %in% sample(tips$caseID, noCases),]
       write.csv(sampledtips, paste0("output/simulation/simsampledtips_perfectClockRate_",k,"_",perTimeRate,"_",g,"_",noCases,".csv"))
-      write.fasta(as.list(sampledtips$sequence), paste(sampledtips$caseID, sampledtips$infD, sep = "_"), 
-                  file.out = paste0("output/simulation/simsampledtips_perfectClockRate_",k,"_",perTimeRate,"_",g,"_",noCases,".fasta"), 
-                  open = "w", nbchar = 60, as.string = F)
+     # write.fasta(as.list(sampledtips$sequence), paste(sampledtips$caseID, sampledtips$infD, sep = "_"), 
+    #              file.out = paste0("output/simulation/simsampledtips_perfectClockRate_",k,"_",perTimeRate,"_",g,"_",noCases,".fasta"), 
+     #             open = "w", nbchar = 60, as.string = F)
       
      # all.fasta=read.dna(paste0("output/simulation/simsampledtips_perfectClockRate_",k,"_",perTimeRate,"_",noCases,".fasta"), format = 'fasta')
     #  alnDist <- dist.dna(all.fasta, model = "raw", as.matrix = TRUE, pairwise.deletion = T)
@@ -76,7 +76,7 @@ for(perTimeRate in perTimeRates){
     from = as.character(outMatrix$parentID)
     TimeDiff = outMatrix$timeDiff
     allCases= as.data.frame(cbind(from,to,TimeDiff))
-    write.csv(allCases, paste0("output/simulation/simFullCases_perfectClockRate_",k,"_",perTimeRate,"_",g,".csv"))
+    #write.csv(allCases, paste0("output/simulation/simFullCases_perfectClockRate_",k,"_",perTimeRate,"_",g,".csv"))
     
   }
  
