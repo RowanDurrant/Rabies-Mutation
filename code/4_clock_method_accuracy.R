@@ -50,7 +50,7 @@ accuracy = log(predictedSNPRate/trueSNPRate)
 df = as.data.frame(cbind(trueSNPRate, predictedSNPRate, accuracy, clockRate, no_cases, percent_sampled))
 
 Accuracy = df
-#write.csv(df, file = "output/simulation/clockrate_method_accuracy.csv")
+write.csv(df, file = "output/simulation/clockrate_method_accuracy.csv")
 
 #df = read.csv("output/simulation/clockrate_method_accuracy.csv")
 
