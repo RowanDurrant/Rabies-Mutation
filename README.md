@@ -24,8 +24,8 @@ Description: Repo for code and data used in the manuscipt "Examining the molecul
 
 ## Code: What is RABV's mutation rate?
 ### Simulations to test accuracy - Figure 3
-- [0_sim_analysis_main.R](code/0_sim_analysis_main.R) - sets up loops for multiple values of mutation rate, seeds etc. Can also be used for above section with some editing
 - [1_sim_output_prep.R](code/1_sim_output_prep.R) - takes simulation output and generates mutations onto cases using a clock rate model (mutations accumulate per unit time). Uses [mutations_function.R](code/mutations_function.R).
+- - [2a_simulate_per_generation.R](code/2a_simulate_per_generation.R) as above
 - [4_clock_method_accuracy.R](code/4_clock_method_accuracy.R) - calculates the SNP/gen prediction method's accuracy.
 - [7_nice_graphs.R](code/7_nice_graphs.R) - makes graphs
 
@@ -33,10 +33,7 @@ Description: Repo for code and data used in the manuscipt "Examining the molecul
 - [5_clock_rate_method_bayesian_combine_uncertainties.R](code/5_clock_rate_method_bayesian_combine_uncertainties.R) - calculate SNPs/gen
 - [6_clock_rate_method_pemba_distribution.R](code/6_clock_rate_method_pemba_distribution.R) - fits distribution to output.
 - [7_nice_graphs.R](code/7_nice_graphs.R) - makes graphs
-
-## Code Flowchart
-
-![Flowchart showing how the scripts feed into each other](flowchart.png)
+- [8_no_gens_before_SNPs.R](code/8_no_gens_before_SNPs.R) - simulates how many generations occur before a substitution happens
 
 ## Output
 - [simulation](output/simulation) - folder with output files relating to all the simulated methods, including divergence-time plot related data and mutation rate calculation method accuracy.
