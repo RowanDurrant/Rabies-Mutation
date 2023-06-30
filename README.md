@@ -42,5 +42,3 @@ Description: Repo for code and data used in the manuscipt "Examining the molecul
 ## Plots
 Files of plots used in the manuscript.
 
-## Communication
-Posters and presentations I've used to communicate this project.
