@@ -25,7 +25,7 @@ Description: Repo for code and data used in the manuscipt "Examining the molecul
 ## Code: What is RABV's mutation rate?
 ### Simulations to test accuracy - Figure 3
 - [1_sim_output_prep.R](code/1_sim_output_prep.R) - takes simulation output and generates mutations onto cases using a clock rate model (mutations accumulate per unit time). Uses [mutations_function.R](code/mutations_function.R).
-- - [2a_simulate_per_generation.R](code/2a_simulate_per_generation.R) as above
+- [2a_simulate_per_generation.R](code/2a_simulate_per_generation.R) as above
 - [4_clock_method_accuracy.R](code/4_clock_method_accuracy.R) - calculates the SNP/gen prediction method's accuracy.
 - [7_nice_graphs.R](code/7_nice_graphs.R) - makes graphs
 
