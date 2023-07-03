@@ -26,6 +26,8 @@ for(i in 1:nrow(df)){
 #Root to tip divergence
 p2 = ggplot(data = df, aes(x = date, y = distance))  +
   geom_point(aes(col = lineage)) +
+  theme(legend.text = element_text(size = 6), 
+        legend.title = element_text(size = 8)) +
   stat_smooth(method="lm",fullrange=TRUE,se=F, col = "black")+
   scale_color_manual(values = c("#000000","#004949","#009292","#ff6db6","#ffb6db",
                                 "#490092","#006ddb","#b66dff","#6db6ff","#b6dbff",
@@ -35,7 +37,7 @@ p2 = ggplot(data = df, aes(x = date, y = distance))  +
   theme_bw() 
 p2 = p2+ annotate("text",
                   label = "x intercept = 1970.35",
-                  x = 2005, y = 0.0165)
+                  x = 2010, y = 0.0165)
 
 #Phylogenetic tree
 tree = read.beast("input/pemba_tz_n153_timescaled.mcc.tre")
@@ -50,13 +52,16 @@ d <- data.frame(node=1:(Nnode(tree)+length(tree@phylo$tip.label)),
 p = ggtree(tree, mrsd="2018-01-01") + 
   theme_tree2() + 
   xlim(1950, 2022)
+  
 
 p = p %<+% d  +  
   geom_tippoint(aes(color=lineage)) +
   scale_color_manual(values = c("#000000","#004949","#009292","#ff6db6","#ffb6db",
                                 "#490092","#006ddb","#b66dff","#6db6ff","#b6dbff",
                                 "#920000","#924900","#db6d00","#24ff24","#ffff6d",
-                                "#555555", "#999999"))
+                                "#555555", "#999999")) +
+  theme(legend.text = element_text(size = 6), 
+        legend.title = element_text(size = 8))
 #Map
 d2 <- data.frame(location = c("Dodoma", "Kibaha", "Kilombero",
                               "Morogoro", "Nachingwea", "Newala",
@@ -92,11 +97,14 @@ p1 = p +
   inset(ggplotGrob(p_tanzania), xmin = 1950, xmax = 1995, ymin = 60, ymax = 150)
 
 library(ggpubr)
+
+tiff("plots/Figure1_hi_res.tiff", width = 2250, height = 1700, units = 'px', res = 300)
 ggarrange(p1, p2, labels = c("A", "B"), common.legend = TRUE, legend = "bottom")
+dev.off()
 
-ggsave("plots/Figure 1.png")
+#ggsave("plots/Figure 1.png")
 
-#FIG 1 PIE CHARTS
+### FIG 1 PIE CHARTS ###
 require(rworldmap)
 require(rworldxtra)
 
@@ -122,6 +130,22 @@ p_tanzania_2 = mapPies(d2, nameX="long",
                                   "#920000","#924900","#db6d00","#24ff24","#ffff6d",
                                   "#555555", "#999999"),
                      addCatLegend = F)
+
+tiff("plots/Figure1_map_hi_res.tiff", width = 1200, height = 1200, units = 'px', res = 300)
+mapPies(d2, nameX="long", 
+        nameY="lat", 
+        nameZs=namevector,
+        xlim = c(35,40),
+        ylim = c(-11, -1),
+        oceanCol = "lightblue",
+        landCol = "white",
+        symbolSize = 5,
+        zColours = c("#000000","#004949","#009292","#ff6db6","#ffb6db",
+                     "#490092","#006ddb","#b66dff","#6db6ff","#b6dbff",
+                     "#920000","#924900","#db6d00","#24ff24","#ffff6d",
+                     "#555555", "#999999"),
+        addCatLegend = F)
+dev.off()
 
 #FIGURE 2
 library(stringr)
@@ -199,10 +223,12 @@ p3 = ggplot(data = df2, aes(x = EquivalentPerGenRate, y = R_Squared)) +
   guides(linetype = "none")
 
 library(ggpubr)
+png("plots/Figure2_hi_res.png", width = 2000, height = 1700, units = 'px', res = 300)
 ggarrange(ggarrange(p1, p2, labels = c("A", "B")), p3, nrow = 2, 
           common.legend = TRUE, legend = "bottom", labels = c(NA, "C"))
+dev.off()
 
-ggsave("plots/Figure 2.png")
+#ggsave("plots/Figure 2.png")
 
 #FIGURE 3
 Accuracy = read.csv("output/simulation/clockrate_method_accuracy.csv")
@@ -213,6 +239,7 @@ percent.labs <- c("1% of cases sequenced", "5% of cases sequenced", "10% of case
                   "20% of cases sequenced")
 names(percent.labs) <- c(0.01, 0.05, 0.1, 0.2)
 
+png("plots/Figure3_hi_res.png", width = 2000, height = 1700, units = 'px', res = 300)
 ggplot(Accuracy, aes(x = trueSNPRate, y = accuracy, colour = no_cases)) +
   geom_point(
     #colour = "palegreen4",
@@ -223,11 +250,11 @@ ggplot(Accuracy, aes(x = trueSNPRate, y = accuracy, colour = no_cases)) +
   xlab("Equivalent Per-Generation Substitution Rate (SNPs/Generation)")+
   ylab("Accuracy (natural log of the ratio)") +
   theme_bw() + 
-  coord_trans(x = "log") + scale_x_continuous(breaks=c(0.05,0.1,0.25,0.5,1,2,3))+
+  coord_trans(x = "log") + scale_x_continuous(breaks=c(0.05,0.1,0.25,0.5,1,2))+
   scale_color_viridis(name = "No. sequences",trans = "log", breaks = c(20,150,1000)) +
   facet_wrap(~percent_sampled,  labeller = labeller(percent_sampled = percent.labs))
-
-ggsave("plots/Figure 3.png")
+dev.off()
+#ggsave("plots/Figure 3.png")
 
 #stats
 mdl1 = lm(data = Accuracy, percent_sampled~accuracy)
@@ -403,11 +430,12 @@ library(ggpubr)
 
 p5 = p1/p2/p3
 
+png("plots/Figure4_hi_res.png", width = 2000, height = 1500, units = 'px', res = 300)
 ggarrange(p4+ rremove("y.text"), p5, nrow = 1,
           common.legend = TRUE, legend="bottom", labels = c("A", "B"))
+dev.off()
 
-
-ggsave("plots/Figure 4.png")
+#ggsave("plots/Figure 4.png")
 
 
 
