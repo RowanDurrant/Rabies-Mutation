@@ -9,7 +9,7 @@ library(grid)
 library(ggplot2)
 library(RColorBrewer)
 
-#FIGURE 1
+#FIGURE 1---------------------------------------------------------------------------
 
 df = read.table("input/pemba non timescaled.txt", header = T)
 clusters = read.csv("input/Pemba_assignment.csv")
@@ -147,7 +147,7 @@ mapPies(d2, nameX="long",
         addCatLegend = F)
 dev.off()
 
-#FIGURE 2
+#FIGURE 2-----------------------------------------------------------------------------------
 library(stringr)
 startSeq = paste(rep("a",12000), collapse = "")
 files = c("output/simulation/simsampledtips_perGen_24_0.000166666666666667_124_621.7.csv",
@@ -230,7 +230,7 @@ dev.off()
 
 #ggsave("plots/Figure 2.png")
 
-#FIGURE 3
+#FIGURE 3-------------------------------------------------------------------
 Accuracy = read.csv("output/simulation/clockrate_method_accuracy.csv")
 library(ggplot2)
 library(viridis)
@@ -269,7 +269,7 @@ sqrt(mean((Accuracy$accuracy[Accuracy$no_cases >= 100 & Accuracy$no_cases < 200]
 sqrt(mean((Accuracy$accuracy[Accuracy$no_cases >= 200 & Accuracy$no_cases < 1000])^2))
 sqrt(mean((Accuracy$accuracy[Accuracy$no_cases < 1000])^2))
 
-#FIGURE 4
+#FIGURE 4-------------------------------------------------------------------------------
 tipDists = read.csv("output/pemba/multiplied_posteriors.csv")
 
 bw = 0.005
@@ -437,9 +437,28 @@ dev.off()
 
 #ggsave("plots/Figure 4.png")
 
+##SUPPLEMENTARY FIGURE 1---------------------------------------------------
 
+df = read.csv("output/simulation/clockrate-gen-model-comparison.csv")
+df = df[is.na(df$Method) == F,]
+df$Method[df$Method == "Clock Rate"] = "Time"
 
-##SUPPLEMENTARY FIGURE 2
+p = ggplot(data = df, aes(x = EquivalentPerGenRate, y = R_Squared, group = Method)) +
+  geom_point(aes(colour = Method), 
+             alpha = 0.5,shape = 16, size = 2) +
+  geom_smooth(se=F, aes(colour = Method))+
+  scale_x_continuous(breaks = c(0.05,0.1,0.2,0.5,1,2,3))+
+  coord_trans(x='log10')+
+  xlab("Equivalent Per-Generation Substitution Rate (SNPs/Generation)") + ylab(expression(R^2))+
+  theme_bw() +
+  scale_colour_manual("", values = c("red", "blue")) +
+  scale_fill_manual(name='Mutation Model',
+                    values=c('Generation'='red','Time'='blue')) +
+  scale_linetype_manual("", values = c("solid", "dashed")) +
+  guides(linetype = "none")+
+  facet_wrap(~PercentSampled)
+
+##SUPPLEMENTARY FIGURE 2---------------------------------------------------------------
 data = read.csv("output/simulation/simsampledtips_perGen_24_0.000166666666666667_124_621.7.csv")
 library(stringr)
 startSeq = paste(rep("a",12000), collapse = "")
@@ -457,7 +476,7 @@ plot(data$divergence ~ data$infD,
 title("A")
 
 ridgepoints = data[data$rate > 8e-06 & data$infD > 750,]
-dataFull = read.csv("../Rabies-Mutation-Rates/output/simulation/simFullCases_perGen_24_0.000166666666666667_124.csv")
+dataFull = read.csv("output/simulation/simFullCases_perGen_24_0.000166666666666667_124.csv")
 dataFull = dataFull[,2:ncol(dataFull)]
 dataFull$from = as.character(dataFull$from)
 dataFull$to = as.character(dataFull$to)
