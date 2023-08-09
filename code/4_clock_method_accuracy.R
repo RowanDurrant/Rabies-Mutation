@@ -52,10 +52,16 @@ df = as.data.frame(cbind(trueSNPRate, predictedSNPRate, accuracy, clockRate, no_
 Accuracy = df
 write.csv(df, file = "output/simulation/clockrate_method_accuracy.csv")
 
-#df = read.csv("output/simulation/clockrate_method_accuracy.csv")
+df = read.csv("output/simulation/clockrate_method_accuracy.csv")
 
 sqrt(mean(df$accuracy[df$trueSNPRate == 0.2]^2))
 sqrt(mean(df$accuracy[df$trueSNPRate == 0.5]^2))
 sqrt(mean(df$accuracy[df$trueSNPRate == 1]^2))
 sqrt(mean(df$accuracy[df$trueSNPRate == 2]^2))
 sqrt(mean(df$accuracy[df$trueSNPRate == 5]^2))
+
+mean(df$accuracy)
+sqrt(mean(df$accuracy^2))
+
+sqrt(mean(df$accuracy[df$no_cases < 50]^2))
+sqrt(mean(df$accuracy[df$no_cases > 2000]^2))
