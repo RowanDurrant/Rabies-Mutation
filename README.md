@@ -9,8 +9,8 @@ Description: Repo for code and data used in the manuscipt "Examining the molecul
 ## Input
 - [EF_simulations](input/EF_simulations) - output from a branching process simulation which we simulate mutations onto.
 - [Pemba_assigment.csv](input/Pemba_assignment.csv) - Lineages of each sequence in the Pemba dataset from [Lushasi et al., 2023](https://elifesciences.org/articles/85262), assigned using [MADDOG](https://github.com/KathrynCampbell/MADDOG).
-- [pemba non timescaled.txt](input/pemba non timescaled.txt) - TempEst divergence time plot output for Pemba data
-- [pemba_m6_m7.txt](pemba_m6_m7.txt) - log file from Lushasi et al.'s BEAST run
+- [pemba non timescaled.txt](input/pemba_non_timescaled.txt) - TempEst divergence time plot output for Pemba data
+- [pemba_m6_m7.txt](input/pemba_m6_m7.txt) - log file from Lushasi et al.'s BEAST run
 - [pemba_tz_n153.aln.fasta](input/pemba_tz_n153.aln.fasta) - Pemba sequences
 - [pemba_tz_n153_timescaled.mcc.tre](input/pemba_tz_n153_timescaled.mcc.tre) - Pemba timescaled tree
 - [serial_interval_clean_RD.csv](input/serial_interval_clean_RD.csv) - raw serial interval estimates from [Mancy et al., 2022](https://www.science.org/doi/full/10.1126/science.abn0713?casa_token=f7QDp2hi9VIAAAAA%3ASbD1Sm1BYnB8bPi42OmQ1B5cF5WqDv9hPxQ6QjHMZNB7YE87lpHq6suaqpIZdN8Iw2yGVx6EaedvgUbQ)
