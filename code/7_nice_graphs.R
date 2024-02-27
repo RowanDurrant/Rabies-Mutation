@@ -437,7 +437,41 @@ dev.off()
 
 #ggsave("plots/Figure 4.png")
 
-##SUPPLEMENTARY FIGURE 1---------------------------------------------------
+##SUPPLEMENTARY FIGURE 1----------------------------------------
+branches = c(71,83,124,156,166,179,191,269,271)
+GIs = c()
+for(b in branches){
+  out = read.csv(paste0("output/simulation/simFullCases_perGen_24_0.000125_",b,".csv"))
+  for(i in out$X){
+    GIs = append(GIs, out$TimeDiff[out$X == i])
+  }
+  
+}
+
+quantile(GIs, c(0.1, 0.01))
+quantile(GIs, c(0.9, 0.99))
+mean(GIs)
+
+GI = data.frame(GIs)
+
+ggplot(GI, aes(x=GIs)) + 
+  geom_histogram(binwidth = 1, fill = "gray50")+
+  geom_vline(xintercept = mean(GI$GIs),
+             colour = "red", linetype = "dashed")+
+  geom_vline(xintercept = median(GI$GIs),
+             colour = "blue", linetype = "dashed") +
+  theme_bw() + xlab("Generation interval (days)")+
+  ylab("")+
+  annotate("text", x=300, y=1250, 
+           label= paste0("mean = ",prettyNum(mean(GI$GIs))),
+           colour = "red") + 
+  annotate("text", x = 300, y=1200, 
+           label = paste0("median = ",prettyNum(median(GI$GIs))),
+           colour = "blue")
+
+
+
+##SUPPLEMENTARY FIGURE 2---------------------------------------------------
 
 df = read.csv("output/simulation/clockrate-gen-model-comparison.csv")
 df = df[is.na(df$Method) == F,]
@@ -458,7 +492,7 @@ p = ggplot(data = df, aes(x = EquivalentPerGenRate, y = R_Squared, group = Metho
   guides(linetype = "none")+
   facet_wrap(~PercentSampled)
 
-##SUPPLEMENTARY FIGURE 2---------------------------------------------------------------
+##SUPPLEMENTARY FIGURE 3---------------------------------------------------------------
 data = read.csv("output/simulation/simsampledtips_perGen_24_0.000166666666666667_124_621.7.csv")
 library(stringr)
 startSeq = paste(rep("a",12000), collapse = "")
