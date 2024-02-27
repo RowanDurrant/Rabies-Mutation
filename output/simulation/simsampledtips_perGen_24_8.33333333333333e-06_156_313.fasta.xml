@@ -2359,7 +2359,7 @@
 	
 
 	<!-- Define MCMC                                                             -->
-	<mcmc id="mcmc" chainLength="10000000" autoOptimize="true" operatorAnalysis="simsampledtips_perGen_24_8.33333333333333e-06_156_313.ops">
+	<mcmc id="mcmc" chainLength="50000000" autoOptimize="true" operatorAnalysis="simsampledtips_perGen_24_8.33333333333333e-06_156_313.ops">
 		<joint id="joint">
 			<prior id="prior">
 				<ctmcScalePrior>

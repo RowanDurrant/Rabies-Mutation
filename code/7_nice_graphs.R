@@ -11,7 +11,7 @@ library(RColorBrewer)
 
 #FIGURE 1---------------------------------------------------------------------------
 
-df = read.table("input/pemba non timescaled.txt", header = T)
+df = read.table("input/pemba_non_timescaled.txt", header = T)
 clusters = read.csv("input/Pemba_assignment.csv")
 df = df[df$tip %in% clusters$ID,]
 
@@ -83,8 +83,8 @@ for(i in 1:nrow(d2)){
 }
 
 
-tanzania = get_stamenmap(bbox = c(left = 33, bottom = -11, right =
-                                    43, top = -1.5), zoom = 6, maptype = 'toner-lite')
+tanzania = get_stadiamap(bbox = c(left = 33, bottom = -11, right =
+                                    43, top = -1.5), zoom = 6, maptype = 'stamen_toner_lite')
 
 p_tanzania = ggmap(tanzania) + 
   geom_point(data = d2, aes(x = long, y = lat, size=freq), colour = "red" , alpha=1) +

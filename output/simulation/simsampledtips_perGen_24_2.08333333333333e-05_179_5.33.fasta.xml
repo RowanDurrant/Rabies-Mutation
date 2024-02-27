@@ -203,7 +203,7 @@
 	
 
 	<!-- Define MCMC                                                             -->
-	<mcmc id="mcmc" chainLength="10000000" autoOptimize="true" operatorAnalysis="simsampledtips_perGen_24_2.08333333333333e-05_179_5.33.ops">
+	<mcmc id="mcmc" chainLength="1000000000" autoOptimize="true" operatorAnalysis="simsampledtips_perGen_24_2.08333333333333e-05_179_5.33.ops">
 		<joint id="joint">
 			<prior id="prior">
 				<ctmcScalePrior>
