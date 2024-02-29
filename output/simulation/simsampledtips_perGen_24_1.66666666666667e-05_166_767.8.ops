@@ -1,13 +1,13 @@
 
 Operator analysis
 Operator                                          Tuning   Count      Time     Time/Op  Pr(accept) 
-scale(clock.rate)                                 0.622   277908     345456   1.24     0.233       
-up:nodeHeights(treeModel) down:clock.rate         1.0     278308     809082   2.91     0.2322      
-subtreeSlide(treeModel)                           59.384  2776700    617851   0.22     0.238       
-Narrow Exchange(treeModel)                                2777902    493815   0.18     0.4106      
-Wide Exchange(treeModel)                                  277823     3088     0.01     0.0028      
-wilsonBalding(treeModel)                                  278673     102561   0.37     0.0161      
-scale(treeModel.rootHeight)                       0.13    277327     81214    0.29     0.2392      
-uniform(nodeHeights(treeModel))                           2777305    969970   0.35     0.7234      
-scale(constant.popSize)                           0.803   278054     24328    0.09     0.2333      
+scale(clock.rate)                                 0.706   1389041    1986034  1.43     0.233       
+up:nodeHeights(treeModel) down:clock.rate         1.0     1389199    4285235  3.08     0.2318      
+subtreeSlide(treeModel)                           78.956  13887420   2845497  0.2      0.24        
+Narrow Exchange(treeModel)                                13886299   2259873  0.16     0.4134      
+Wide Exchange(treeModel)                                  1389454    14637    0.01     0.0027      
+wilsonBalding(treeModel)                                  1388435    483973   0.35     0.0156      
+scale(treeModel.rootHeight)                       0.141   1389282    360422   0.26     0.2406      
+uniform(nodeHeights(treeModel))                           13892769   4450297  0.32     0.7258      
+scale(constant.popSize)                           0.786   1388101    68856    0.05     0.2336      
 
