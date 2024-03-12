@@ -52,7 +52,7 @@ d <- data.frame(node=1:(Nnode(tree)+length(tree@phylo$tip.label)),
 p = ggtree(tree, mrsd="2018-01-01") + 
   theme_tree2() + 
   xlim(1950, 2022)
-  
+
 
 p = p %<+% d  +  
   geom_tippoint(aes(color=lineage)) +
@@ -82,11 +82,18 @@ for(i in 1:nrow(d2)){
   d2$freq[i] = as.numeric(tab[d2$location[i]])
 }
 
+tanzania = map_data("world", region = c("tanzania", "kenya", "zambia",
+                                        "uganda", "rwanda", "burundi",
+                                        "democratic republic of the congo",
+                                        "malawi", "mozambique", "somalia",
+                                        "ethiopia", "south sudan"))
 
-tanzania = get_stadiamap(bbox = c(left = 33, bottom = -11, right =
-                                    43, top = -1.5), zoom = 6, maptype = 'stamen_toner_lite')
+p_tanzania <- ggplot(tanzania, aes(long, lat)) +
+  geom_map(map=tanzania, aes(map_id=region), fill=NA, color="black") +
+  xlim(27, 43) + ylim(-14, 2)+
+  coord_map() + theme_linedraw()
 
-p_tanzania = ggmap(tanzania) + 
+p_tanzania = p_tanzania + 
   geom_point(data = d2, aes(x = long, y = lat, size=freq), colour = "red" , alpha=1) +
   theme(axis.title = element_blank(), 
         axis.text  = element_blank(),
@@ -105,8 +112,9 @@ dev.off()
 #ggsave("plots/Figure 1.png")
 
 ### FIG 1 PIE CHARTS ###
-require(rworldmap)
-require(rworldxtra)
+
+library(scatterpie)
+library(ggspatial)
 
 namevector =sort(unique(df$lineage))
 d2[,namevector] <- NA
@@ -116,35 +124,39 @@ for(j in 1:nrow(d2)){
     d2[j,k] = lineage_tab[k]
   }
 }
+d2[is.na(d2)] = 0
 
-p_tanzania_2 = mapPies(d2, nameX="long", 
-                     nameY="lat", 
-                     nameZs=namevector,
-                     xlim = c(35,40),
-                     ylim = c(-11, -1),
-                     oceanCol = "lightblue",
-                     landCol = "white",
-                     symbolSize = 10,
-                     zColours = c("#000000","#004949","#009292","#ff6db6","#ffb6db",
-                                  "#490092","#006ddb","#b66dff","#6db6ff","#b6dbff",
-                                  "#920000","#924900","#db6d00","#24ff24","#ffff6d",
-                                  "#555555", "#999999"),
-                     addCatLegend = F)
+p_tanzania_2 <- ggplot(tanzania, aes(long, lat)) +
+  geom_map(map=tanzania, aes(map_id=region), fill=NA, color="black") +
+  xlim(27, 43) + ylim(-14, 2)+
+  coord_map() + theme_bw()+
+  annotate("text", label = "Tanzania", x = 34.8, y = -6, col = "grey50", size = 7)+
+  annotate("text", label = "Kenya", x = 38, y = 0, col = "grey50", size = 3.5)+
+  annotate("text", label = "Uganda", x = 32.5, y = 1, col = "grey50", size = 3.5)+
+  annotate("text", label = "Zambia", x = 31, y = -11, col = "grey50", size = 3.5)+
+  annotate("text", label = "DRC", x = 27.6, y = -5, col = "grey50", size = 3.5)+
+  geom_segment(aes(x=40-4.62963, xend=40, y=-13, yend=-13), colour="black",
+               size = 2)+
+  annotate("text", label = "500 km", x = 38, y = -13.9) +
+  ylab("latitude") + xlab("longitude")
 
-tiff("plots/Figure1_map_hi_res.tiff", width = 1000, height = 1200, units = 'px', res = 300)
-mapPies(d2, nameX="long", 
-        nameY="lat", 
-        nameZs=namevector,
-        xlim = c(35,38),
-        ylim = c(-11, 0),
-        oceanCol = "lightblue",
-        landCol = "white",
-        symbolSize = 10,
-        zColours = c("#000000","#004949","#009292","#ff6db6","#ffb6db",
-                     "#490092","#006ddb","#b66dff","#6db6ff","#b6dbff",
-                     "#920000","#924900","#db6d00","#24ff24","#ffff6d",
-                     "#555555", "#999999"),
-        addCatLegend = F)
+p_tanzania_2 = p_tanzania_2 + 
+  geom_scatterpie(data = d2, aes(x = long, y = lat, r=sqrt(freq)/5), cols=colnames(d2[,5:21]), alpha=1) +
+  scale_fill_manual(values = c("#000000","#004949","#009292","#ff6db6","#ffb6db",
+                               "#490092","#006ddb","#b66dff","#6db6ff","#b6dbff",
+                               "#920000","#924900","#db6d00","#24ff24","#ffff6d",
+                               "#555555", "#999999"))+
+  theme(#axis.title = element_blank(), 
+    #axis.text  = element_blank(),
+    #axis.ticks = element_blank(),
+    panel.grid.major = element_blank(), 
+    panel.grid.minor = element_blank(),
+    legend.position = "none")
+
+p_tanzania_2
+
+tiff("plots/Figure1_map_redo.tiff", width = 1000, height = 1200, units = 'px', res = 300)
+p_tanzania_2
 dev.off()
 
 #FIGURE 2-----------------------------------------------------------------------------------
