@@ -35,7 +35,7 @@ for(j in seeds){
           
           no_cases = append(no_cases, l)
           
-          clockRates = clockRates[round(length(clockRates)*0.25):length(clockRates)] #25% burn in 
+          clockRates = clockRates[round(length(clockRates)*0.1):length(clockRates)] #10% burn in 
           clockRate = append(clockRate, mean(clockRates))
           SIs = rlnorm(length(clockRates), meanlog=2.96, sdlog=0.82)
           multipliedPosteriors = clockRates*SIs*12000
@@ -49,11 +49,6 @@ for(j in seeds){
 accuracy = log(predictedSNPRate/trueSNPRate)
 df = as.data.frame(cbind(trueSNPRate, predictedSNPRate, accuracy, clockRate, no_cases, percent_sampled))
 
-Accuracy = df
-write.csv(df, file = "output/simulation/clockrate_method_accuracy.csv")
-
-df = read.csv("output/simulation/clockrate_method_accuracy.csv")
-
 sqrt(mean(df$accuracy[df$trueSNPRate == 0.2]^2))
 sqrt(mean(df$accuracy[df$trueSNPRate == 0.5]^2))
 sqrt(mean(df$accuracy[df$trueSNPRate == 1]^2))
@@ -65,3 +60,5 @@ sqrt(mean(df$accuracy^2))
 
 sqrt(mean(df$accuracy[df$no_cases < 50]^2))
 sqrt(mean(df$accuracy[df$no_cases > 2000]^2))
+
+write.csv(df, file = "output/simulation/clockrate_method_accuracy.csv")
