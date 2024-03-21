@@ -460,9 +460,9 @@ for(b in branches){
   
 }
 
-quantile(GIs, c(0.1, 0.01))
-quantile(GIs, c(0.9, 0.99))
-mean(GIs)
+library(fitdistrplus)
+ln <- fitdist(GIs, "lnorm")
+quantile(ln, probs = c(0.025,0.975))
 
 GI = data.frame(GIs)
 
