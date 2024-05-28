@@ -58,7 +58,8 @@ sqrt(mean(df$accuracy[df$trueSNPRate == 5]^2))
 mean(df$accuracy)
 sqrt(mean(df$accuracy^2))
 
+mean(df$accuracy[df$no_cases < 50])
 sqrt(mean(df$accuracy[df$no_cases < 50]^2))
-sqrt(mean(df$accuracy[df$no_cases > 2000]^2))
+
 
 write.csv(df, file = "output/simulation/clockrate_method_accuracy.csv")

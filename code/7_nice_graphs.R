@@ -268,19 +268,6 @@ ggplot(Accuracy, aes(x = trueSNPRate, y = accuracy, colour = no_cases)) +
 dev.off()
 #ggsave("plots/Figure 3.png")
 
-#stats
-mdl1 = lm(data = Accuracy, percent_sampled~accuracy)
-summary(mdl1)
-mdl2 = lm(data = Accuracy, no_cases~accuracy)
-summary(mdl2)
-mdl3 = lm(data = Accuracy, trueSNPRate~accuracy)
-summary(mdl3)
-
-sqrt(mean((Accuracy$accuracy[Accuracy$no_cases < 100])^2))
-sqrt(mean((Accuracy$accuracy[Accuracy$no_cases >= 100 & Accuracy$no_cases < 200])^2))
-sqrt(mean((Accuracy$accuracy[Accuracy$no_cases >= 200 & Accuracy$no_cases < 1000])^2))
-sqrt(mean((Accuracy$accuracy[Accuracy$no_cases < 1000])^2))
-
 #FIGURE 4-------------------------------------------------------------------------------
 tipDists = read.csv("output/pemba/multiplied_posteriors.csv")
 
